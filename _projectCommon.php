@@ -15,7 +15,6 @@ EOBRANDING;
     
     function add2users() {
        global $Nav;
-       # $Nav->addCustomNav("Screenshots", "/mat/about/screenshots.php", "_self", 2);
        $Nav->addCustomNav("Wiki", "http://wiki.eclipse.org/MavenIntegration", "_self", 2);
     }
        
@@ -33,6 +32,6 @@ EOBRANDING;
 
     require_once($_SERVER['DOCUMENT_ROOT'] . "/projects/common/project-info.class.php");
     $projectInfo = new ProjectInfo("technology.m2e");
-    $projectInfo->generate_common_nav( $Nav, "add2users", NULL, "add2contributors" );   # Define your project-wide Nav bars here.
+    # $projectInfo->generate_common_nav( $Nav, "add2users", NULL, "add2contributors" );   # Define your project-wide Nav bars here.
 
 ?>
