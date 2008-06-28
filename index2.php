@@ -32,7 +32,7 @@
     <ul>
     <li>Launching Maven builds from within IDE</li>
     <li>Wizards for creating new Maven projects, pom.xml and to enable Maven support on existing projects</li>
-    <li>Form-based and XML editors for editing Maven pom.xml with advanced navigation and code assistance</li>
+    <li>Afavanced form-based and XML editors for authoring Maven pom.xml</li>
     <li>Integration with JDT, WTP, AJDT, Mylyn and other Eclipse tools</li> 
     <li>Dependency management for Java build path based on Maven's pom.xml</li>
     <li>Quick fixes in the Java editor for looking up required dependencies/jars by the class or package name</li>
