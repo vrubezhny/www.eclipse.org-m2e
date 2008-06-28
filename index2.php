@@ -18,7 +18,6 @@
 	# End: page-specific settings
 	#
 		
-	# Paste your HTML content between the EOHTML markers!	
 	$html = <<<EOHTML
 
 	<div id="midcolumn">
@@ -49,7 +48,7 @@
       <h3>News Group</h3>
       <ul>
       <li><a href="news://news.eclipse.org:119/eclipse.technology.m2e">eclipse.technology.m2e</a><br>
-        Main forum for user questions and support. Got questions? Need advice? Miss a feature? Please don't hesitate to ask. 
+        Main forum for user questions and support. Got questions? Need advice? Miss a feature? Please don't hesitate to ask.<br> 
         [<a href="http://dev.eclipse.org/newslists/news.eclipse.technology.m2e/maillist.html">archive</a>] 
         [<a href="http://www.eclipse.org/newsportal/thread.php?group=eclipse.technology.m2e">web interface</a>]
         [<a href="http://wiki.eclipse.org/index.php/Webmaster_FAQ#How_do_I_access_the_Eclipse_newsgroups.3F">FAQ</a>]
