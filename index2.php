@@ -22,13 +22,13 @@
 	$html = <<<EOHTML
 
 	<div id="midcolumn">
-    <p>The Maven Integration provides tight integration for 
+    <p>The goal of Maven Integration (M2E) project is to provide support for 
     <a href="http://maven.apache.org/">Maven</a> software project management and 
-    comprehension tool into the IDE.
-    Project is initially based on the Codehaus <a href="http://m2eclipse.codehaus.org/">m2eclipse code.</p>
-
-    <p>Using Maven integration you could keep your project consistent between the IDE and
-    the command line build. The following tasks in the IDE:</p>
+    comprehension tool in the IDE and keep project build consistent between 
+    the IDE and the command line build.</p> 
+    
+    <p>Project is based on the Codehaus <a href="http://m2eclipse.codehaus.org/">m2eclipse</a> 
+    code. The following list gives an example of features available in the IDE:</p>
 
     <ul>
     <li>Launching Maven builds from within IDE</li>
@@ -40,7 +40,8 @@
     <li>Automatic downloading of the required dependencies from remote Maven repositories</li>
     <li>Quick search for dependencies in Maven remote repositories</li>
     </ul>
-    
+
+    <p>More info is coming soon.</p> 
 	</div>
 
   <div id="rightcolumn">
