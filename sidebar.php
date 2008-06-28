@@ -15,13 +15,5 @@
 			</div>
 		</div>
 		
-		<div class="sideitem">
-			<h6>Newsgroup</h6>
-			<div align="left" style="padding:5px">Got questions? Need advice? Miss a feature? Don't hesitate to ask in the 
-			<a href="news://news.eclipse.org:119/eclipse.technology.m2e">Newsgroup</a>
-			<a href="http://dev.eclipse.org/mhonarc/newsLists/news.eclipse.technology.m2e/">[archive]</a></div>
-			         
-		</div>
-
 EOHTML
 ?>
