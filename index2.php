@@ -48,23 +48,22 @@
     <div class="homeitem">
       <h3>News Group</h3>
       <ul>
-      <li><a href="news://news.eclipse.org:119/eclipse.technology.m2e">eclipse.technology.m2e</a>: 
-        Main forum for user questions and support 
-        [<a href="http://dev.eclipse.org/newslists/news.eclipse.technology.m2e/maillist.html">Archive</a>] 
-        [<a href="http://www.eclipse.org/newsportal/thread.php?group=eclipse.technology.m2e">Web Interface</a>]
+      <li><a href="news://news.eclipse.org:119/eclipse.technology.m2e">eclipse.technology.m2e</a><br>
+        Main forum for user questions and support. Got questions? Need advice? Miss a feature? Please don't hesitate to ask. 
+        [<a href="http://dev.eclipse.org/newslists/news.eclipse.technology.m2e/maillist.html">archive</a>] 
+        [<a href="http://www.eclipse.org/newsportal/thread.php?group=eclipse.technology.m2e">web interface</a>]
         [<a href="http://wiki.eclipse.org/index.php/Webmaster_FAQ#How_do_I_access_the_Eclipse_newsgroups.3F">FAQ</a>]
         </li>
       </ul>
-      <p>Got questions? Need advice? Miss a feature? Please don't hesitate to ask.</p>
     </div>
   		
     <div class="homeitem">
       <h3>Mailing Lists</h3>
       <ul>
-      <li><a href="https://dev.eclipse.org/mailman/listinfo/m2e-users">m2e-users@eclipse.org</a>: 
-        General users Discussion [<a href="http://dev.eclipse.org/mhonarc/lists/m2e-users/maillist.html">Archive</a>]</li>
-      <li><a href="https://dev.eclipse.org/mailman/listinfo/m2e-users">m2e-dev@eclipse.org</a>: 
-        Developers Discussion [<a href="http://dev.eclipse.org/mhonarc/lists/m2e-dev/maillist.html">Archive</a>]</li>
+      <li><a href="https://dev.eclipse.org/mailman/listinfo/m2e-users">m2e-users@eclipse.org</a><br> 
+        General users Discussion [<a href="http://dev.eclipse.org/mhonarc/lists/m2e-users/maillist.html">archive</a>]</li>
+      <li><a href="https://dev.eclipse.org/mailman/listinfo/m2e-users">m2e-dev@eclipse.org</a><br>
+        Developers Discussion [<a href="http://dev.eclipse.org/mhonarc/lists/m2e-dev/maillist.html">archive</a>]</li>
       </ul>
     </div>
     
