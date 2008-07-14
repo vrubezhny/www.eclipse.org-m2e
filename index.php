@@ -57,15 +57,19 @@
     </p>
     
     <p>They can help each other out.
-    Eclipse can make it easier to work with Maven, and Maven can make it easier to     
-    support complex projects using different programming models.  
-    Eclipse editors make it easy to find and maintain project information, and
-    the Eclipse Java tools can use the Maven dependencies like any others for compiling,
+    Eclipse can make it easier to work with Maven, and Maven can make it easier 
+    for Eclipse to support complex projects using different programming models.  
+    On the Eclipse side, editors make it easy to find and maintain Maven project information, 
+    and the Java tools can use the Maven dependencies for compiling,
     searching, content assist, etc. (even in derived project types like WTP and AJDT).
-    Maven conventions and software repositories make it easy to manage library 
-    dependencies, to assemble projects, and to build from the command-line in a 
-    process of continuous integration.  All this helps both developers writing software and
-    plug-in projects implementing software build or assembly processes.
+    On the Maven side, conventions and software repositories make it easy to manage library 
+    dependencies, to assemble projects, and to build from the command-line.  
+    Further, those deploying new software tools need 
+    only write a Maven plug-in to get simple support for configuring and running
+    the tool in Eclipse.  Finally, Eclipse plug-in developers can use Maven under the 
+    covers to deploy tools in combination with additional UI support.
+    Bringing Maven to Eclipse helps people write application and development tools
+    in the IDE and on the command line.
     </p>
     <p>Hence, we have something for everyone:</p>
      <ol>
