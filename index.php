@@ -90,9 +90,6 @@ To discuss the goals of the project publicly or otherwise contribute, subscribe 
 and then email 
   <a href="mailto:m2e-dev@eclipse.org?subject=project%20goals">m2e-dev@eclipse.org</a>.
 </li>
-<li>We'll announce when we've moved to the old lists and to 
-<a href="https://dev.eclipse.org/mailman/listinfo/m2e-dev">m2e-user</a>.
-</li>
 <!-- form omitted - might raise hackles
 <li>
     <form method="post" action="http://www.sonatype.com/m2eclipse/announce">If you want us to let you know when we've moved, let us know your email address:
@@ -102,6 +99,9 @@ and then email
 </li>
 -->
 </ul>
+<p>We'll announce when we've moved to the old lists and to 
+<a href="https://dev.eclipse.org/mailman/listinfo/m2e-dev">m2e-user</a>.
+</p>
    <p>
    The m2eclipse team
    </p>
