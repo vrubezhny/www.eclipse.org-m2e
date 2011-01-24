@@ -74,7 +74,7 @@
   </p:target_environments>
 
   <p:compatibility_with_previous_releases>
-    <h3>Compatibility with Sonatype m2eclipse 0.10.x and earlier
+    <h3>Compatibility with Sonatype m2eclipse 0.12.x and earlier
       m2eclipse releases
     </h3>
     <p>
@@ -90,7 +90,7 @@
       versions of m2eclipse. Sharing of the same workspace with m2e
       0.13.0 and earlier versions of m2eclipse will not be supported.
       The users are expected to start with new workspace and import
-      their projects using "Existing Maven Projects" import wizards.
+      their projects using "Existing Maven Projects" import wizard.
     </p>
   </p:compatibility_with_previous_releases>
 
