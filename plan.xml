@@ -168,5 +168,8 @@
         </ul>
       </p:proposed>
     </p:theme>
+    <p:theme name="Eclipse 4.1">
+      <p:description><p>no support, no testing on 4.1</p></p:description>
+    </p:theme>
   </p:themes_and_priorities>
 </p:plan>
