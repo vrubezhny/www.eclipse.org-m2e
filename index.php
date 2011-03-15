@@ -5,7 +5,7 @@
 	#****************************************************************************
 	
 	#
-	$pageTitle 		= "m2e eclipse";
+	$pageTitle 		= "m2eclipse";
 	$pageKeywords	= "maven, m2e, m2eclipse, build, eclipse";
 	$pageAuthor		= "m2e team";
 	
@@ -21,24 +21,25 @@
 	$html = <<<EOHTML
    
 	<div id="midcolumn">
-	<h1>m2eclipse</h1>
 	<h2>Mission statement</h2>
-The goal of the m2eclipse project is to provide a first-class Maven support in the Eclipse IDE, making it easier to edit Maven's pom.xml, run a build from the IDE and much more. For Java developers, the very tight integration with the rest of the JDT greatly simplify the consumption of other Java artifacts either being hosted on <a href="http://mavencentral.sonatype.com">Maven Central</a>, or in your in-house Maven repository.<p/>
+The goal of the m2eclipse project is to provide a first-class Maven support in the Eclipse IDE, making it easier to edit Maven's pom.xml, run a build from the IDE and much more. For Java developers, the very tight integration with  JDT greatly simplifies the consumption of  Java artifacts either being hosted on open source repositories such as <a href="http://mavencentral.sonatype.com">Maven Central</a>, or in your in-house Maven repository.<p/>
 
 m2eclipse is also a platform that let others provide better integration with additional Maven plugins (e.g. Android, web development, etc.), and facilitates the distribution of those extensions through the m2e marketplace.<p/>
 
 	<h2>Getting started</h2>
 	m2e works with Eclipse 3.6 (Helios) and 3.7 (Indigo).<p/>
-	
-	Nightly builds are available at: http://download.eclipse.org/technology/m2e/updates/N <p/>
-Milestones builds: http://download.eclipse.org/technology/m2e/updates/M<p/>
+	The following p2 repositories are available:
+	<ul>
+	<li>Nightly builds are available at: http://download.eclipse.org/technology/m2e/updates/N</li>
+    </li>Milestones builds: http://download.eclipse.org/technology/m2e/updates/M</li>
+    </ul>
 	<h2>Some highlights</h2>
 	<h2>Getting involved</h2>
 	If you are a user and have question, the <a href="https://dev.eclipse.org/mailman/listinfo/m2e-users">m2e-users@eclipse.org</a> should be used.<p/>
 	
 	If you are interested in contributing to m2e or are building extensions to m2e, the <a href="https://dev.eclipse.org/mailman/listinfo/m2e-dev">m2e-dev@eclipse.org</a> should be used.<p/>
 	
-	If you have bugs, want to provide feedback, please open tickets at https://bugs.eclipse.org/bugs/enter_bug.cgi?product=m2e<p/>
+	If you have bugs or want to provide feedback, please a bug on <a href="https://bugs.eclipse.org/bugs/enter_bug.cgi?product=m2e">eclipse bugzilla </a><p/>
 EOHTML;
 
 	# Generate the web page
