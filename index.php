@@ -43,7 +43,7 @@ m2eclipse is also a platform that let others provide better integration with add
 	<p/>
 	<p/>
 	<p/>
-	Apache Maven is trademark of the Apache foundation.
+	Apache Maven is trademark of the Apache Software Foundation.
 EOHTML;
 
 	# Generate the web page
