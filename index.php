@@ -43,7 +43,7 @@ m2eclipse is also a platform that let others provide better integration with add
 	<p/>
 	<p/>
 	<p/>
-	Apache Maven is trademark of the Apache Software Foundation.
+	Apache and Apache Maven are trademarks of the Apache Software Foundation. Maven Central is a service mark of Sonatype, Inc. Nexus, Maven IDE, Maven Shell, and Polyglot Maven are trademarks of Sonatype, Inc. Maven Central, Maven IDE, Maven Shell, and Polyglot Maven are intended to complement Apache Maven and should not be confused with Apache Maven.
 EOHTML;
 
 	# Generate the web page
