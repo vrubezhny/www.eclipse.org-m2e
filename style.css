@@ -81,3 +81,8 @@
 	background: url("images/backgroundMain.png") no-repeat;
 	padding-top: 210px;
 }
+
+#midcolumn {
+	width: 600px;
+	padding: 0 10px 10px 10px;
+}
