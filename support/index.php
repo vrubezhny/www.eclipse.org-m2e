@@ -3,6 +3,7 @@
 
 	$html = <<<EOHTML
 <div id="midcolumn">
+	<h3>m2eclipse - Support</h3>
 <ul>
 	<li>User's list <a href="https://dev.eclipse.org/mailman/listinfo/m2e-users">m2e-users@eclipse.org</a></li>
 	<li><a href="https://bugs.eclipse.org/bugs/enter_bug.cgi?product=m2e">Bugzilla</a></li>

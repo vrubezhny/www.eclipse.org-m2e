@@ -3,6 +3,7 @@
 
 	$html = <<<EOHTML
 <div id="midcolumn">
+	<h3>m2eclipse - Documentation</h3>
 	<ul>
 		<li><a href="http://wiki.eclipse.org/Maven_Integration">Eclipsepedia</a></li>
 	</ul>

@@ -34,18 +34,24 @@
 </div>
 
 <div id="rightcolumn">
-	<h3>Committers</h3>
-	<ul>
-		<li><a href='/projects/lists.php?list=projectsforcommitter&param=bbentmann'>Benjamin Bentmann</a></li>
-		<li><a href='/projects/lists.php?list=projectsforcommitter&param=ifedorenk'>Igor Fedorenko</a></li>
-		<li><a href='/projects/lists.php?list=projectsforcommitter&param=jvanzyl'>Jason Van Zyl</a></li>
-		<li><a href='/projects/lists.php?list=projectsforcommitter&param=mkleint'>Milos Kleint</a></li>
-		<li><a href='/projects/lists.php?list=projectsforcommitter&param=mpiggott'>Matthew Piggott</a></li>
-		<li><a href='/projects/lists.php?list=projectsforcommitter&param=prapicau'>Pascal Rapicault</a></li>
-		<li><a href='/projects/lists.php?list=projectsforcommitter&param=ptatavu'>Paul Tatavu</a></li>
-		<li><a href='/projects/lists.php?list=projectsforcommitter&param=dplatonof'>Dmitry Platonoff</a></li>
-		<li><a href='/projects/lists.php?list=projectsforcommitter&param=rgould'>Richard Gould</a></li>
-	</ul>
+	 <div class="sideitem">
+		<h6>Incubation</h6>
+		<div align="center"><a href="/projects/what-is-incubation.php"><img align="center" src="/images/egg-incubation.png" border="0" alt="Incubation" /></a></div>
+	 </div>
+	 <div>
+		<h3>Committers</h3>
+		<ul>
+			<li><a href='/projects/lists.php?list=projectsforcommitter&param=bbentmann'>Benjamin Bentmann</a></li>
+			<li><a href='/projects/lists.php?list=projectsforcommitter&param=ifedorenk'>Igor Fedorenko</a></li>
+			<li><a href='/projects/lists.php?list=projectsforcommitter&param=jvanzyl'>Jason Van Zyl</a></li>
+			<li><a href='/projects/lists.php?list=projectsforcommitter&param=mkleint'>Milos Kleint</a></li>
+			<li><a href='/projects/lists.php?list=projectsforcommitter&param=mpiggott'>Matthew Piggott</a></li>
+			<li><a href='/projects/lists.php?list=projectsforcommitter&param=prapicau'>Pascal Rapicault</a></li>
+			<li><a href='/projects/lists.php?list=projectsforcommitter&param=ptatavu'>Paul Tatavu</a></li>
+			<li><a href='/projects/lists.php?list=projectsforcommitter&param=dplatonof'>Dmitry Platonoff</a></li>
+			<li><a href='/projects/lists.php?list=projectsforcommitter&param=rgould'>Richard Gould</a></li>
+		</ul>
+	</div>
 </div>
 EOHTML;
 

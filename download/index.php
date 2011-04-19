@@ -3,11 +3,14 @@
 
 	$html = <<<EOHTML
 <div id="midcolumn">
-	<p>m2e is tested against Eclipse 3.6 (Helios) and 3.7 (Indigo) and is available through the following p2 repositories.</p>
-	<ul>
-		<li>Milestones: <a href="http://download.eclipse.org/technology/m2e/updates/M">http://download.eclipse.org/technology/m2e/updates/M</a></li>
-		<li>Nightly builds: <a href="http://download.eclipse.org/technology/m2e/updates/N">http://download.eclipse.org/technology/m2e/updates/N</a></li>
-	</ul>
+	<h3>Installing m2eclipse</h3>
+	<p>All downloads are provided under the terms and conditions of the <a href="/legal/epl/notice.php">Eclipse Foundation Software User Agreement</a> unless otherwise specified.</p>
+	<p>m2e is tested against Eclipse 3.6 (Helios) and 3.7 (Indigo).</p>
+	<h3>Update Sites</h3>
+	<h4>Milestone</h4>
+	<a href="http://download.eclipse.org/technology/m2e/updates/M">http://download.eclipse.org/technology/m2e/updates/M</a>
+	<h4>Nightly Builds</h4>
+	<a href="http://download.eclipse.org/technology/m2e/updates/N">http://download.eclipse.org/technology/m2e/updates/N</a>
 </div>
 EOHTML;
 	
