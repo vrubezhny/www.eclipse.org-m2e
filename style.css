@@ -76,3 +76,8 @@
 #bigbuttons a * {
 	visibility: hidden;
 }
+
+#novaContent {
+	background: url("images/backgroundMain.png") no-repeat;
+	padding-top: 210px;
+}
