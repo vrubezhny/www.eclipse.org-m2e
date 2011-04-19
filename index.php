@@ -30,7 +30,7 @@
 	<h3>Maven Integration (m2e)</h3>
 	<p>The goal of the m2eclipse project is to provide a first-class <a href="http://maven.apache.org">Apache Maven</a> support in the Eclipse IDE, making it easier to edit Maven's pom.xml, run a build from the IDE and much more. For Java developers, the very tight integration with  JDT greatly simplifies the consumption of  Java artifacts either being hosted on open source repositories such as <a href="http://mavencentral.sonatype.com">Maven Central</a>, or in your in-house Maven repository.<p/>
 	<p>m2eclipse is also a platform that let others provide better integration with additional Maven plugins (e.g. Android, web development, etc.), and facilitates the distribution of those extensions through the m2e marketplace.<p/>
-	<div style="font-size:small;">Apache and Apache Maven are trademarks of the Apache Software Foundation. Maven Central is a service mark of Sonatype, Inc. Nexus, Maven IDE, Maven Shell, and Polyglot Maven are trademarks of Sonatype, Inc. Maven Central, Maven IDE, Maven Shell, and Polyglot Maven are intended to complement Apache Maven and should not be confused with Apache Maven.</div>
+	<div style="font-size: x-small; position: absolute; bottom: 100px; width: 600px;">Apache and Apache Maven are trademarks of the Apache Software Foundation. Maven Central is a service mark of Sonatype, Inc. Nexus, Maven IDE, Maven Shell, and Polyglot Maven are trademarks of Sonatype, Inc. Maven Central, Maven IDE, Maven Shell, and Polyglot Maven are intended to complement Apache Maven and should not be confused with Apache Maven.</div>
 </div>
 
 <div id="rightcolumn">
