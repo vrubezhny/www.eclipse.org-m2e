@@ -2,37 +2,28 @@
 	# Set the theme for your project's web pages.
 	# See the Committer Tools "How Do I" for list of themes
 	# https://dev.eclipse.org/committers/ 
-	$theme = "Lazarus";
+	$theme = "Nova";
 
-	$branding = <<<EOBRANDING
-<div id="branding">
-<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maven Integration (M2E)</h1>
-</div>
-EOBRANDING;
-	$Menu->setProjectBranding($branding);
-	
-	include("sidebar.php");
-    
-    function add2users() {
-       global $Nav;
-       $Nav->addCustomNav("Wiki", "http://wiki.eclipse.org/Maven_Integration", "_self", 2);
-    }
-       
-    function add2contributors() {
-       global $Nav;
-#       $Nav->addCustomNav(...);
-    }
-    
+	# Define your project-wide Nav bars here.
 	# Format is Link text, link URL (can be http://www.someothersite.com/), target (_self, _blank), level (1, 2 or 3)
 	# these are optional
-	#$Nav->addNavSeparator("Project Home", 	"downloads.php");
-	#$Nav->addCustomNav("Downloads", 		"downloads.php", 	"_self", 2);
-	#$Nav->addCustomNav("Installation", 		"install.php", 		"_self", 2);
-	#$Nav->addCustomNav("FAQ", 				"faq.php", 			"_self", 2);
+	$Nav->setLinkList(array());
+	$Nav->addNavSeparator("m2e", 	"/m2e/");
+	$Nav->addCustomNav("Download", "/m2e/download/", "_self", 3);
+	$Nav->addCustomNav("Documentation", "/m2e/documentation/", "_self", 3);
+	$Nav->addCustomNav("Support", "/m2e/support/", "_self", 3);
+	$Nav->addCustomNav("Getting Involved", "/m2e/developers/", "_self", 3);
 
-    require_once($_SERVER['DOCUMENT_ROOT'] . "/projects/common/project-info.class.php");
-    $projectInfo = new ProjectInfo("technology.m2e");
-    # $projectInfo->generate_common_nav( $Nav, "add2users", NULL, "add2contributors" );   # Define your project-wide Nav bars here.
-    $projectInfo->generate_common_nav( $Nav, "add2users", NULL, NULL );   # Define your project-wide Nav bars here.
+	$pageTitle 		= "m2eclipse";
+	$pageKeywords	= "maven, m2e, m2eclipse, build, eclipse";
+	$pageAuthor		= "m2e team";
 
+	$Menu->setMenuItemList(array());
+	$Menu->addMenuItem("Home", "/m2e/", "_self");
+	$Menu->addMenuItem("Download", "/m2e/download/", "_self");
+	$Menu->addMenuItem("Documentation", "/m2e/documentation/", "_self");
+	$Menu->addMenuItem("Support", "/m2e/support/", "_self");
+	$Menu->addMenuItem("Developers", "/m2e/developers/", "_self");
+
+	$App->AddExtraHtmlHeader('<link rel="stylesheet" type="text/css" href="style.css"/>' . "\n\t");
 ?>
