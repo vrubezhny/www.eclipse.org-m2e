@@ -2,7 +2,7 @@
 #bigbuttons {
 	position: relative;
 	left: 450px;
-	top: -170px;
+	top: -110px;
 }
 #bigbuttons h3{
 	visibility: hidden;
@@ -57,7 +57,7 @@
 #buttonSupport {
    background:transparent url("images/buttonSupport.png") no-repeat 0 0;
    top: 0px;
-   left: 280px;
+   left: 250px;
 }
 
 #buttonSupport:hover {
@@ -67,7 +67,7 @@
 #buttonInvolved {
    background:transparent url("images/buttonInvolved.png") no-repeat 0 0;
    top: 87px;
-   left: 280px;
+   left: 250px;
 }
 
 #buttonInvolved:hover {
@@ -79,20 +79,33 @@
 }
 
 #novaContent {
-	background: url("images/backgroundMain.png") no-repeat;
+	background-image: url("images/backgroundMain.png") no-repeat top left;
+	background-color: #FFF;
 	padding-top: 100px;
 }
 
 #midcolumn {
-	width: 700px;
+	width: 660px;
 	padding: 20px;
 	float: left;
 	background: #FFF;
 }
 
+/* My Comment */
+
 #rightcolumn {
 	float: right;
-	width: 250px;
+	width: 240px;
 	padding: 0px;
 	margin-right: 20px;
+	background: #FFF;
+}
+
+#rightcolumn li {
+	list-style-type: disc;
+}
+
+#sideitem {
+	background: none;
+	background-color: #FFF;
 }

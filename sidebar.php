@@ -2,7 +2,7 @@
     $sidebar = <<<EOHTML
 
 		<div class="sideitem">
-			<h6>Contributors</h6>
+			<h3>Contributors</h3>
 			<ul><li><a href="http://www.sonatype.com" target="_blank">Sonatype</a></li></ul>
 		</div>
 		
