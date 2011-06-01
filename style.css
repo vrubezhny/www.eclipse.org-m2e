@@ -79,7 +79,9 @@
 }
 
 #novaContent {
-	background-image: url("images/backgroundMain.png") no-repeat top left;
+	background-image: url("images/backgroundMain.png");
+	background-repeat:no-repeat;
+    background-position:left top;
 	background-color: #FFF;
 	padding-top: 100px;
 }
