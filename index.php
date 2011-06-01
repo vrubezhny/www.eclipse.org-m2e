@@ -55,7 +55,7 @@
 		</ul>
 	</div>
 </div>
-<div style="font-size: x-small; clear:both; padding-left: 10px; width:600px;">Apache and Apache Maven are trademarks of the Apache Software Foundation. Maven Central is a service mark of Sonatype, Inc. Nexus, Maven IDE, Maven Shell, and Polyglot Maven are trademarks of Sonatype, Inc. Maven Central, Maven IDE, Maven Shell, and Polyglot Maven are intended to complement Apache Maven and should not be confused with Apache Maven.</div>
+<div style="font-size: x-small; clear:both; padding-left: 20px; padding-top: 10px; width:600px;">Apache and Apache Maven are trademarks of the Apache Software Foundation. Maven Central is a service mark of Sonatype, Inc. Nexus, Maven IDE, Maven Shell, and Polyglot Maven are trademarks of Sonatype, Inc. Maven Central, Maven IDE, Maven Shell, and Polyglot Maven are intended to complement Apache Maven and should not be confused with Apache Maven.</div>
 EOHTML;
 
 	# Generate the web page
