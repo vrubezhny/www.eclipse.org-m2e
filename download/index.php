@@ -7,10 +7,8 @@
 	<p>All downloads are provided under the terms and conditions of the <a href="/legal/epl/notice.php">Eclipse Foundation Software User Agreement</a> unless otherwise specified.</p>
 	<p>m2e is tested against Eclipse 3.6 (Helios) and 3.7 (Indigo).</p>
 	<h3>Update Sites</h3>
-	<h4>Milestone</h4>
-	<a href="http://download.eclipse.org/technology/m2e/updates/M">http://download.eclipse.org/technology/m2e/updates/M</a>
-	<h4>Nightly Builds</h4>
-	<a href="http://download.eclipse.org/technology/m2e/updates/N">http://download.eclipse.org/technology/m2e/updates/N</a>
+	<h4>m2e 1.0.x milestone build repository</h4>
+	<a href="http://download.eclipse.org/technology/m2e/milestones/1.0">http://download.eclipse.org/technology/m2e/milestones/1.0</a>
 </div>
 EOHTML;
 	
