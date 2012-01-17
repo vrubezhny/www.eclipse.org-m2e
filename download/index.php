@@ -15,8 +15,15 @@
 	you must access them from Eclipse (<a href="http://help.eclipse.org/topic//org.eclipse.platform.doc.user/tasks/tasks-127.htm">see how</a>). 
 	</p>
 	<h3>Update Sites</h3>
-	<h4>m2e release build repository</h4>
+
+	<h4>Latest m2e release (recommended)</h4>
 	http://download.eclipse.org/technology/m2e/releases
+
+	<h4>m2e milestone builds towards version 1.1</h4>
+	http://download.eclipse.org/technology/m2e/milestones/1.1
+	
+	<h4>Latest m2e 1.1 SNAPSHOT build (not tested, not hosted at eclipse.org)</h4>
+	https://repository.sonatype.org/content/repositories/forge-sites/m2e/1.1.0/N/LATEST/
 </div>
 EOHTML;
 	
