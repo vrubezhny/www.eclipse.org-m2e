@@ -11,8 +11,8 @@
 	available builds and m2e build repository layout.
 	</p>
 	<p>
-	Please note that links below point at Eclipse <b>Update sites/p2 repositories</b>; 
-	you must access it from Eclipse (<a href="http://help.eclipse.org/topic//org.eclipse.platform.doc.user/tasks/tasks-127.htm">see how</a>). 
+	Please note that links below point at Eclipse <b>p2 repositories</b>; 
+	you must access them from Eclipse (<a href="http://help.eclipse.org/topic//org.eclipse.platform.doc.user/tasks/tasks-127.htm">see how</a>). 
 	</p>
 	<h3>Update Sites</h3>
 	<h4>m2e release build repository</h4>
