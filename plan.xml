@@ -2,10 +2,10 @@
 <?xml-stylesheet type="text/xsl" href="project-plan-render.xsl"?>
 <!--?xml-stylesheet type="text/xsl" href="project-plan-render.xsl"?-->
 <p:plan xmlns:p="http://www.eclipse.org/project/plan" xmlns="http://www.w3.org/1999/xhtml">
-  <p:release projectid="m2e" version="0.13.0"/>
+  <p:release projectid="m2e" version="1.1.0"/>
   <p:introduction>
     <p>M2E provides both a framework for building Maven-centric Eclipse
-      tools and set of tools and user interface elements directly
+      tools and a set of tools and user interface elements directly
       consumable by Eclipse Users.</p>
     <div>
       <p>As a framework, M2E provides facilities to import and configure
@@ -19,7 +19,7 @@
         <li>wizards to import existing and to create new Maven projects
         </li>
         <li>rich form-based and text-based pom.xml file editor</li>
-        <li>launch configuration type to launch Maven build directly
+        <li>launch configuration types to launch Maven build directly
           from Eclipse IDE
         </li>
         <li>access Maven repository index to browse repository contents
@@ -41,27 +41,22 @@
       <p>
         Release milestones will be occurring at roughly 6 week
         intervals, and will be aligned with the
-        <a href="http://wiki.eclipse.org/Indigo_Simultaneous_Release">
-          Indigo Simultaneous Release
+        <a href="http://wiki.eclipse.org/Juno/Simultaneous_Release_Plan">
+          Juno Simultaneous Release
         </a>
         train.
       </p>
     </p:preamble>
-    <p:milestone date="02/07/2011" milestone="M5">
-      <div>0.13.0 M5</div>
-    </p:milestone>
-    <p:milestone date="03/14/2011" milestone="M6">
-      <div>0.13.0 M6</div>
-    </p:milestone>
-    <p:milestone date="05/02/2011" milestone="M7">
-      <div>0.13.0 M7</div>
+    <p:milestone date="27/06/2012" milestone="1.1">
+      <div>1.1.0</div>
     </p:milestone>
   </p:release_milestones>
+  
 
   <p:target_environments>
     <p>M2E requires minimum Java SE 5 VM.</p>
-    <p>M2E is compatible with Eclipse 3.5.2, Eclipse 3.6.2 and Eclipse
-      3.7 and is generally expected to work on each of these Eclipse
+    <p>M2E is compatible with Eclipse 3.7.2, 3.8 and Eclipse
+      4.2 and is generally expected to work on each of these Eclipse
       releases respective referenced platforms with additional
       requirement of Java SE 5 or better VM.
     </p>
@@ -74,65 +69,31 @@
   </p:target_environments>
 
   <p:compatibility_with_previous_releases>
-    <h3>Compatibility with Sonatype m2eclipse 0.12.x and earlier
-      m2eclipse releases
-    </h3>
+    <h3>Compatibility with Sonatype m2e 1.0.x</h3>
     <p>
       <strong>API Contract Compatibility:</strong>
-      To comply with Eclipse Foundation requirements, all m2e java package
-      and extension points have been moved to org.eclipse.m2e
-      namespace. No compatibility layer will be provided for consumers
-      of earlier versions of m2eclipse.
+      m2e 1.1 API is backwards compatible with m2e 1.0.x.
     </p>
     <p>
       <strong>Workspace Compatibility:</strong>
-      No migration will be provided for workspaces created with earlier
-      versions of m2eclipse. Sharing of the same workspace with m2e
-      0.13.0 and earlier versions of m2eclipse will not be supported.
-      The users are expected to start with new workspace and import
-      their projects using "Existing Maven Projects" import wizard.
+      m2e 1.1 workspace metadata is backwards compatible with m2e 1.0.x
     </p>
   </p:compatibility_with_previous_releases>
 
   <p:themes_and_priorities>
     <p:preamble>
     </p:preamble>
-    <p:theme name="Robust build lifecycle mapping">
+    <p:theme name="Encourage comminity paritcipation">
       <p:committed>
         <ul>
           <li>
-            <strong>Metadata driven lifecycle mapping.</strong>
-            M2E will define lifecycle mapping metadata format and
-            mechanisms to embed mapping metadata in project pom.xml
-            files, share mapping metadata among multiple related
-            projects and provide mapping metadata via Eclipse extension 
-            point.
+            <strong>Agile opensource project</strong>
+            m2e is an agile opensource project and as such does not have 
+            feature and/or bugfix roadmap. We encourage community members to come
+            forward with ideas how to improve m2e and generally plan to prioritise 
+            patches review over other m2e development activities. 
           </li>
         </ul>
-      </p:committed>
-      <p:proposed>
-        <ul>
-          <li>
-            <strong>Public lifecycle mapping API.</strong>
-          </li>
-        </ul>
-      </p:proposed>
-    </p:theme>
-    <p:theme name="Discovery and installation of extensions">
-      <p:committed>
-        <ul>
-          <strong>Find and install required extension.</strong>
-          M2E will only support limited number of standard Maven plugins
-          out of the box, while support for other Maven plugins is
-          expected to be provided by thirdparty extension. M2E will
-          provide discovery mechanism that will help users find and
-          install extensions required to support their projects.
-        </ul>
-      </p:committed>
-    </p:theme>
-    <p:theme name="Better pom.xml editor">
-      <p:committed>
-        <p>TBD</p>
       </p:committed>
     </p:theme>
     <p:theme name="Stay current with Maven technologies">
@@ -140,36 +101,13 @@
         <ul>
           <li>
             <strong>Include latest released Maven version</strong>
-            Maven is an active opensource project with new release
-            produced at roughly six weeks intervals. To maintain parity
-            with bugfixes and new features available to command line
-            Maven users, m2e will include latest Maven version available
-            in time for Ingigo release. We will work with Maven core
+            To maintain parity with bugfixes and new features available to 
+            command line Maven users, m2e will include latest Maven version 
+            available in time for Juno release. We will work with Maven core
             developers to align m2e and maven release schedules.
           </li>
         </ul>
       </p:committed>
-      <p:proposed>
-        <ul>
-          <li>Mechanism to deliver Maven Core updates</li>
-        </ul>
-      </p:proposed>
-    </p:theme>
-    <p:theme name="Mature Eclipse.org project">
-      <p:committed>
-        <ul>
-          <li>Move m2e project to Eclipse Foundation</li>
-        </ul>
-      </p:committed>
-      <p:proposed>
-        <ul>
-          <li>Join "Java" eclipse distribution</li>
-          <li>Graduate from incubation</li>
-        </ul>
-      </p:proposed>
-    </p:theme>
-    <p:theme name="Eclipse 4.1">
-      <p:description><p>no support, no testing on 4.1</p></p:description>
     </p:theme>
   </p:themes_and_priorities>
 </p:plan>
