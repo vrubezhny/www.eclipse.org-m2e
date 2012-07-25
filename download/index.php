@@ -4,6 +4,11 @@
 	$html = <<<EOHTML
 <div id="midcolumn">
 	<h3>Installing m2eclipse</h3>
+
+	<a href='http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=252' title='Drag and drop into a running Eclipse Indigo workspace to install Maven Integration for Eclipse'> 
+	<img src='http://marketplace.eclipse.org/misc/installbutton.png'/>
+    </a>
+
 	<p>All downloads are provided under the terms and conditions of the <a href="/legal/epl/notice.php">Eclipse Foundation Software User Agreement</a> unless otherwise specified.</p>
 	<p>m2e is tested against Eclipse 3.7 (Indigo) and 3.8/4.2 (Juno).</p>
 	<p>
