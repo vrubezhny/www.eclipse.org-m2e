@@ -24,11 +24,11 @@
 	<h4>Latest m2e release (recommended)</h4>
 	http://download.eclipse.org/technology/m2e/releases
 
-	<h4>m2e milestone builds towards version 1.2</h4>
-	http://download.eclipse.org/technology/m2e/milestones/1.2
+	<h4>m2e milestone builds towards version 1.3</h4>
+	http://download.eclipse.org/technology/m2e/milestones/1.3
 	
 	<h4>Latest m2e 1.2 SNAPSHOT build (not tested, not hosted at eclipse.org)</h4>
-	https://repository.sonatype.org/content/repositories/forge-sites/m2e/1.2.0/N/LATEST/
+	https://repository.sonatype.org/content/repositories/forge-sites/m2e/1.3.0/N/LATEST/
 </div>
 EOHTML;
 	
