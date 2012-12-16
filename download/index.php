@@ -10,7 +10,7 @@
     </a>
 
 	<p>All downloads are provided under the terms and conditions of the <a href="/legal/epl/notice.php">Eclipse Foundation Software User Agreement</a> unless otherwise specified.</p>
-	<p>m2e is tested against Eclipse 3.7 (Indigo) and 3.8/4.2 (Juno).</p>
+	<p>m2e is tested against Eclipse 4.2 (Juno) and 4.3 (Kepler) Milestone builds.</p>
 	<p>
 	See <a href="http://wiki.eclipse.org/M2E_updatesite_and_gittags">http://wiki.eclipse.org/M2E_updatesite_and_gittags</a> for detailed information about
 	available builds and m2e build repository layout.
@@ -28,7 +28,7 @@
 	http://download.eclipse.org/technology/m2e/milestones/1.3
 	
 	<h4>Latest m2e 1.3 SNAPSHOT build (not tested, not hosted at eclipse.org)</h4>
-	https://repository.sonatype.org/content/repositories/forge-sites/m2e/1.3.0/N/LATEST/
+	http://nexus.tesla.io:8081/nexus/content/sites/m2e.extras/m2e/1.3.0/N/LATEST/
 </div>
 EOHTML;
 	
