@@ -16,8 +16,8 @@
 	available builds and m2e build repository layout.
 	</p>
 	<p>
-	<strong>m2e 1.3 and earlier version have been removed from the main m2e update site.</strong> 
-	These old releases are still available and can be installed from repositories documented in 
+	<strong>m2e versions 1.1 to 1.3.1 have been removed from m2e update site and are no longer available for download.</strong> 
+	There are some more info about this in 
 	<a href="http://wiki.eclipse.org/M2E_updatesite_and_gittags">http://wiki.eclipse.org/M2E_updatesite_and_gittags</a> 
 	</p>
 	<p>
