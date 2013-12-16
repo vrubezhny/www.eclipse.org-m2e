@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="project-plan-render.xsl"?>
 <!--?xml-stylesheet type="text/xsl" href="project-plan-render.xsl"?-->
 <p:plan xmlns:p="http://www.eclipse.org/project/plan" xmlns="http://www.w3.org/1999/xhtml">
-  <p:release projectid="m2e" version="1.1.0"/>
+  <p:release projectid="m2e" version="1.5.0"/>
   <p:introduction>
     <p>M2E provides both a framework for building Maven-centric Eclipse
       tools and a set of tools and user interface elements directly
@@ -41,24 +41,23 @@
       <p>
         Release milestones will be occurring at roughly 6 week
         intervals, and will be aligned with the
-        <a href="http://wiki.eclipse.org/Juno/Simultaneous_Release_Plan">
-          Juno Simultaneous Release
+        <a href="http://wiki.eclipse.org/Luna/Simultaneous_Release_Plan">
+          Luna Simultaneous Release
         </a>
         train.
       </p>
     </p:preamble>
-    <p:milestone date="27/06/2012" milestone="1.1">
-      <div>1.1.0</div>
+    <p:milestone date="25/06/2015" milestone="1.5.0">
+      <div>1.5.0</div>
     </p:milestone>
   </p:release_milestones>
   
 
   <p:target_environments>
-    <p>M2E requires minimum Java SE 5 VM.</p>
-    <p>M2E is compatible with Eclipse 3.7.2, 3.8 and Eclipse
-      4.2 and is generally expected to work on each of these Eclipse
-      releases respective referenced platforms with additional
-      requirement of Java SE 5 or better VM.
+    <p>M2E requires minimum Java SE 6 VM.</p>
+    <p>M2E is compatible with Eclipse 4.3 and Eclipse
+      4.4 and is generally expected to work on each of these Eclipse
+      releases respective referenced platforms.
     </p>
     <p:internationalization>
       <p>All m2e user interface elements are externalized, but only
@@ -69,14 +68,14 @@
   </p:target_environments>
 
   <p:compatibility_with_previous_releases>
-    <h3>Compatibility with Sonatype m2e 1.0.x</h3>
+    <h3>Compatibility with Eclipse m2e 1.4.x</h3>
     <p>
       <strong>API Contract Compatibility:</strong>
-      m2e 1.1 API is backwards compatible with m2e 1.0.x.
+      m2e 1.5 API is backwards compatible with m2e 1.4.x.
     </p>
     <p>
       <strong>Workspace Compatibility:</strong>
-      m2e 1.1 workspace metadata is backwards compatible with m2e 1.0.x
+      m2e 1.5 workspace metadata is backwards compatible with m2e 1.4.x
     </p>
   </p:compatibility_with_previous_releases>
 
@@ -103,7 +102,7 @@
             <strong>Include latest released Maven version</strong>
             To maintain parity with bugfixes and new features available to 
             command line Maven users, m2e will include latest Maven version 
-            available in time for Juno release. We will work with Maven core
+            available in time for Luna release. We will work with Maven core
             developers to align m2e and maven release schedules.
           </li>
         </ul>
