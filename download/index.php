@@ -33,7 +33,7 @@
 	http://download.eclipse.org/technology/m2e/milestones/1.5
 
 	<h4>Latest m2e 1.5 SNAPSHOT build (not tested, not hosted at eclipse.org)</h4>
-	http://nexus.tesla.io:8081/nexus/content/sites/m2e.extras/m2e/1.5.0/N/LATEST/
+	http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2e/1.5.0/N/LATEST/
 </div>
 EOHTML;
 	
