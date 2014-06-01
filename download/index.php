@@ -10,7 +10,7 @@
     </a>
 
 	<p>All downloads are provided under the terms and conditions of the <a href="/legal/epl/notice.php">Eclipse Foundation Software User Agreement</a> unless otherwise specified.</p>
-	<p>m2e is tested against Eclipse 4.2 (Juno) and 4.3 (Kepler).</p>
+	<p>m2e is tested against Eclipse 4.4 (Luna).</p>
 	<p>
 	See <a href="http://wiki.eclipse.org/M2E_updatesite_and_gittags">http://wiki.eclipse.org/M2E_updatesite_and_gittags</a> for detailed information about
 	available builds and m2e build repository layout.
@@ -32,8 +32,8 @@
 	<h4>m2e milestone builds towards version 1.5</h4>
 	http://download.eclipse.org/technology/m2e/milestones/1.5
 
-	<h4>Latest m2e 1.5 SNAPSHOT build (not tested, not hosted at eclipse.org)</h4>
-	http://repository.takari.io:8081/nexus/content/sites/m2e.extras/m2e/1.5.0/N/LATEST/
+	<h4>Latest m2e 1.6 SNAPSHOT build (not tested, not hosted at eclipse.org)</h4>
+	http://repository.takari.io:8081/nexus/content/sites/m2e.extras/m2e/1.6.0/N/LATEST/
 </div>
 EOHTML;
 	
