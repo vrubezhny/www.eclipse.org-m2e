@@ -29,8 +29,8 @@
 	<h4>Latest m2e release (recommended)</h4>
 	http://download.eclipse.org/technology/m2e/releases
 
-	<h4>m2e milestone builds towards version 1.5</h4>
-	http://download.eclipse.org/technology/m2e/milestones/1.5
+	<h4>m2e milestone builds towards version 1.6</h4>
+	http://download.eclipse.org/technology/m2e/milestones/1.6
 
 	<h4>Latest m2e 1.6 SNAPSHOT build (not tested, not hosted at eclipse.org)</h4>
 	http://repository.takari.io:8081/nexus/content/sites/m2e.extras/m2e/1.6.0/N/LATEST/
