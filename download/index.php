@@ -33,7 +33,7 @@
 	http://download.eclipse.org/technology/m2e/milestones/1.6
 
 	<h4>Latest m2e 1.6 SNAPSHOT build (not tested, not hosted at eclipse.org)</h4>
-	http://repository.takari.io:8081/nexus/content/sites/m2e.extras/m2e/1.6.0/N/LATEST/
+	https://otto.takari.io/content/sites/m2e.extras/m2e/1.6.0/N/LATEST/
 </div>
 EOHTML;
 	
