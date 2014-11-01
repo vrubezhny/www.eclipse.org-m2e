@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!-->
+<html lang="en"> <!--<![endif]-->
+  <head>
+    <title>M2Eclipse | Execution Not Covered</title>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Takari is focused on continuous delivery for the Maven ecosystem and offers Apache Maven training classes" />
+    <meta name="author" content="takari.io" />
+    <meta property="twitter:account_id" content="4503599627980362" />  
+    
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/m2eclipse.css" />
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />        
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/assets/plugins/flexslider/flexslider.css" />
+    <link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css" />
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/assets/css/code/syntax-highlighting.css" />
+    
+    <!-- GA -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-56202333-1', 'takari.io');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      
+            <div class="header">
+        <div class="navbar navbar-default" role="navigation">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/index.html"> 
+                <img id="logo-header" src="/assets/img/m2e_logo@2x.svg" alt="M2Eclipse" width="150" height="61" style="margin:20px 0px 10px;"/>
+              </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-responsive-collapse">
+              <ul class="nav navbar-nav navbar-left">
+              
+                  
+                  
+                  <li class="">
+                      <a href="/m2e-news.html">News</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e-downloads.html">Download</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/documentation/m2e-documentation.html">Documentation</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e-community.html">Community</a>
+                  </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div><!-- END header -->
+      
+      <div class="container" style="margin-top:20px;">
+        <div class="row">
+  <div class="col-md-3">
+    <div class="margin-bottom-30"></div>
+    <h4 class="headline">Users</h2>
+    <ul class="unstyled">
+      <li><a href="/documentation/m2e-faq.html">FAQ</a></li>
+      <li><a href="/documentation/m2e-execution-not-covered.html">Execution Not Covered</a></li>
+    </ul>  
+    <h4 class="headline">Developers</h2>
+    <ul class="unstyled">
+      <li><a href="/documentation/m2e-development-environment.html">Developement Environment Setup</a></li>
+    </ul>  
+    <h4 class="headline">Extension Developers</h2>
+    <ul class="unstyled">
+      <li><a href="/documentation/m2e-extension-development.html">Getting Started</a></li>
+    </ul>      
+    <h4 class="headline">Release Notes</h2>
+    <ul class="unstyled">
+      <li><a href="/documentation/release-notes-15.html">M2Eclipse 1.5</a></li>
+    </ul>      
+  </div>  
+  <div class="col-md-9 docs">
+  <h3>Background</h3><p>M2Eclipse 0.12 and earlier executed some parts of Maven build lifecycle inside Eclipse and then configured the Eclipse project based on after-execution state collected in MavenProject. This was controlled by many different sets of maven goals -- goals when projects were imported,a project configuration changes and workspace full and incremental builds. Some of these goals were configured at workspace level, some in project/.settings. On top of that, there was project-level setting to "skip" maven-compiler-plugin execution.</p><p>Unfortunately, this did not work well or not at all for many projects. Probably even worse, it did not <em>always</em> work for many projects, so we had to go through series of refresh/update dependencies/update configuration/rebuild voodoo (or "m2eclipse dance" as some called it) to get projects in a good state. For example <a href="https://issues.sonatype.org/browse/MNGECLIPSE-823">MNGECLIPSE-823</a> was the most voted issue in M2Eclipse jira and it was a direct manifestation of this "flakiness".</p><p>Most, if not all, such problems were traced back to one of two root causes. </p>
+<ol>
+  <li><p>Out-of-workspace resource changes made by Maven plugin triggered unexpected workspace builds. This was very indeterministic. In some cases projects appeared to work fine. In some cases, generated/filtered resources would go missing. And in some cases workspace build would go on forever.</p></li>
+  <li><p>Various JVM and OS resources leaks by Maven plugins was another common cause of problems.</p></li>
+</ol><p>To solve these long-standing issues, M2Eclipse 1.0 requires explicit instructions what to do with all Maven plugins bound to "interesting" phases (see [M2E interesting lifecycle phases](M2E interesting lifecycle phases "wikilink")) of a project build lifecycle. We call these instructions "project build lifecycle mapping" or simply "lifecycle mapping" because they define how m2e maps information from project <code>pom.xml</code> file to Eclipse workspace project configuration and behaviour during Eclipse workspace build.</p><p>Project build lifecycle mapping can be configured in a project's <code>pom.xml</code>, contributed by Eclipse plugins, or defaulted to the commonly used Maven plugins shipped with m2e. We call these "lifecycle mapping metadata sources". m2e will create error marker like below for all plugin executions that do not have lifecycle mapping in any of the mapping metadata sources.</p>
+<div class="highlight"><pre><a name="line-%s"></a>Plugin execution not covered by lifecycle configuration:
+<a name="line-%s"></a>org.apache.maven.plugins:maven-antrun-plugin:1.3:run
+<a name="line-%s"></a>    (execution: generate-sources-input, phase: generate-sources)
+</pre></div><p>M2Eclipse matches plugin executions to actions using combination of plugin groupId, artifactId, version range and goal. There are three basic actions that M2Eclipse can be instructed to do with a plugin execution -- <strong>ignore</strong>, <strong>execute</strong> and delegate to a project <strong>configurator</strong>.</p><h3>Delegate to a Project Configurator (recommended)</h3><p>A <strong>configurator</strong> mapping tells M2Eclipse to delegate workspace project configuration mapping for matching plugin execution to an implementation of AbstractProjectConfigurator registered with m2e using projectConfigurators extension point.</p><p>In most cases a configurator mapping will be used by M2Eclipse extension developers. See <a href="/documentation/m2e-extension-development.html">M2E Extension Development</a> page for more information about developing M2Eclipse extensions.</p><h3>Ignore Plugin Goal</h3><p>The <strong>ignore</strong> option, as the name suggests, tells M2Eclipse to silently ignore the plugin execution. Here is sample pom.xml snippet:</p>
+<div class="highlight"><pre><a name="line-%s"></a>&lt;pluginManagement&gt;
+<a name="line-%s"></a>  &lt;plugins&gt;
+<a name="line-%s"></a>    &lt;plugin&gt;
+<a name="line-%s"></a>     &lt;groupId&gt;org.eclipse.m2e&lt;/groupId&gt;
+<a name="line-%s"></a>     &lt;artifactId&gt;lifecycle-mapping&lt;/artifactId&gt;
+<a name="line-%s"></a>     &lt;version&gt;1.0.0&lt;/version&gt;
+<a name="line-%s"></a>     &lt;configuration&gt;
+<a name="line-%s"></a>       &lt;lifecycleMappingMetadata&gt;
+<a name="line-%s"></a>         &lt;pluginExecutions&gt;
+<a name="line-%s"></a>           &lt;pluginExecution&gt;
+<a name="line-%s"></a>             &lt;pluginExecutionFilter&gt;
+<a name="line-%s"></a>               &lt;groupId&gt;some-group-id&lt;/groupId&gt;
+<a name="line-%s"></a>               &lt;artifactId&gt;some-artifact-id&lt;/artifactId&gt;
+<a name="line-%s"></a>               &lt;versionRange&gt;[1.0.0,)&lt;/versionRange&gt;
+<a name="line-%s"></a>               &lt;goals&gt;
+<a name="line-%s"></a>                 &lt;goal&gt;some-goal&lt;/goal&gt;
+<a name="line-%s"></a>               &lt;/goals&gt;
+<a name="line-%s"></a>             &lt;/pluginExecutionFilter&gt;
+<a name="line-%s"></a>             &lt;action&gt;
+<a name="line-%s"></a>               &lt;ignore/&gt;
+<a name="line-%s"></a>             &lt;/action&gt;
+<a name="line-%s"></a>           &lt;/pluginExecution&gt;
+<a name="line-%s"></a>         &lt;/pluginExecutions&gt;
+<a name="line-%s"></a>       &lt;/lifecycleMappingMetadata&gt;
+<a name="line-%s"></a>     &lt;/configuration&gt;
+<a name="line-%s"></a>    &lt;/plugin&gt;
+<a name="line-%s"></a>  &lt;/plugins&gt;
+<a name="line-%s"></a>&lt;/pluginManagement&gt;
+</pre></div><p>HINT: M2Eclipse provides a quick-fix associated with "plugin execution not covered" to easily create <code>&lt;pluginManagement/&gt;</code> elements like above.</p><h3>Execute Plugin Goal</h3><p>The <strong>execute</strong> option tells m2e to execute the action as part of Eclipse workspace full or incremental build. Beware that M2Eclipse does not provide any safeguards against rogue maven plugins that leak classloaders, modify random files inside workspace or throw nasty exceptions to fail the build. Use this as the last resort and make sure you know what you are doing.</p>
+<div class="highlight"><pre><a name="line-%s"></a>&lt;pluginManagement&gt;
+<a name="line-%s"></a>  &lt;plugins&gt;
+<a name="line-%s"></a>    &lt;plugin&gt;
+<a name="line-%s"></a>     &lt;groupId&gt;org.eclipse.m2e&lt;/groupId&gt;
+<a name="line-%s"></a>     &lt;artifactId&gt;lifecycle-mapping&lt;/artifactId&gt;
+<a name="line-%s"></a>     &lt;version&gt;1.0.0&lt;/version&gt;
+<a name="line-%s"></a>     &lt;configuration&gt;
+<a name="line-%s"></a>       &lt;lifecycleMappingMetadata&gt;
+<a name="line-%s"></a>         &lt;pluginExecutions&gt;
+<a name="line-%s"></a>           &lt;pluginExecution&gt;
+<a name="line-%s"></a>             &lt;pluginExecutionFilter&gt;
+<a name="line-%s"></a>               &lt;groupId&gt;some-group-id&lt;/groupId&gt;
+<a name="line-%s"></a>               &lt;artifactId&gt;some-artifact-id&lt;/artifactId&gt;
+<a name="line-%s"></a>               &lt;versionRange&gt;[1.0.0,)&lt;/versionRange&gt;
+<a name="line-%s"></a>               &lt;goals&gt;
+<a name="line-%s"></a>                 &lt;goal&gt;some-goal&lt;/goal&gt;
+<a name="line-%s"></a>               &lt;/goals&gt;
+<a name="line-%s"></a>             &lt;/pluginExecutionFilter&gt;
+<a name="line-%s"></a>             &lt;action&gt;
+<a name="line-%s"></a>               &lt;execute&gt;
+<a name="line-%s"></a>                 &lt;runOnIncremental&gt;false&lt;/runOnIncremental&gt;
+<a name="line-%s"></a>               &lt;/execute &gt;
+<a name="line-%s"></a>             &lt;/action&gt;
+<a name="line-%s"></a>           &lt;/pluginExecution&gt;
+<a name="line-%s"></a>         &lt;/pluginExecutions&gt;
+<a name="line-%s"></a>       &lt;/lifecycleMappingMetadata&gt;
+<a name="line-%s"></a>     &lt;/configuration&gt;
+<a name="line-%s"></a>    &lt;/plugin&gt;
+<a name="line-%s"></a>  &lt;/plugins&gt;
+<a name="line-%s"></a>&lt;/pluginManagement&gt;
+</pre></div><p>HINT: Use quick fix to create "ignore" mapping, then replace <code>&lt;ignore/&gt;</code> action with <code>&lt;execute/&gt;</code>. M2Eclipse 1.3 and newer assume safer runOnIncremental=false by default. It is recommended to always specific desired runOnIncremental value explicitly in lifecycle mapping configuration.</p><h3>Metadata Source Lookup Order</h3><p>M2Eclipse considers lifecycle mapping metadata sources in the following order:</p>
+<ol>
+  <li><p>The project's <code>pom.xml</code></p></li>
+  <li><p>The parent <code>pom.xml</code>, the grand-parent <code>pom.xml</code> and so on.</p></li>
+  <li><p>M2Eclipse 1.2+ workspace preferences (see below)</p></li>
+  <li><p>Installed M2Eclipse extensions (in no particular order)</p></li>
+  <li><p>M2Eclipse 1.1+ lifecycle mapping metadata provided by maven plugin (see below)</p></li>
+  <li><p>Default lifecycle mapping metadata shipped with M2Eclipse</p></li>
+</ol><p>M2Eclipse uses the first applicable mapping found.</p><h3>Lifecycle mapping metadata provided by maven plugin</h3><p>Starting with m2e 1.1, maven plugin developers are able to provide lifecycle mapping metadata as part of the plugin itself. If present, such mapping metadata will be automatically used by m2e, thus eliminating the need for plugin specific project configurator and/or lifecycle mapping metadata in pom.xml.</p><p>[M2E compatible maven plugins](M2E compatible maven plugins "wikilink") wiki page provides more information about developing m2e-compatible maven plugins that do not require external build lifecycle mapping configuration.</p><h3>Eclipse workspace lifecycle mapping metadata</h3><p>Starting with M2Eclipse 1.2, it is now possible to configure lifecycle mapping metadata in m2e workspace preferences. Plugin goals can be ignored at workspace level using new quick-fix, which is available both from <code>pom.xml</code> editor and from Problems view. It is also possible to edit lifecycle mapping xml file directly. The file can be opened from Preferences-&gt;Maven-&gt;LifecycleMappings.</p><h2>Viewing Effective Lifecycle Mapping</h2><p>Starting with M2Eclipse 1.1, it is now possible to see effective lifecycle mapping in Maven-&gt;LifecycleMapping project properties.</p><p><img src="/assets/img/m2e-project-properties-lifecyclemapping.png" alt="Lifecycle""/></p><h2>Help Improve M2Eclipse Maven Plugin Coverage</h2><p>First and foremost, you need to understand the desired behaviour. In most cases this should be limited to IDE usecase, i.e. editing sources and running tests, and not the complete Maven build, so plugin goals that publish build results to a remote repository can be ignored without any adverse side effects, while java source code generation most likely is necessary.</p><p>If the desired behaviour is applicable to other Maven projects using the plugin goal, we strongly recommend documenting your findings in m2e <a href="https://bugs.eclipse.org/bugs/">bugzilla</a>. Please use "[mojo] plugin-artifact-id:goal support" bugzilla summary and make sure to <a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=specific&order=relevance+desc&bug_status=__open__&product=m2e&content=mojo">search for existing records</a>. When submitting new request, please provide standalone example project and detailed description of desired behaviour when the project is imported in Eclipse workspace. This will allow other users and interested developers to track popularity of various Maven plugins and schedule implementation work accordingly.</p><p><a href="/documentation/m2e-extension-development.html">M2E Extension Development</a> has pointers how to develop M2Eclipse extensions.</p><h2>Common Problems</h2><p>Some Maven plugins are recognized as problematic and will produce error markers with a text similar to: <em>maven-dependency-plugin (goals "copy-dependencies","unpack") is not supported by M2Eclipse</em></p><p>In version 1.0 there is no quick fix available for this but it is possible to define a lifecycle mapping for the plugin as well (as shown in <em>ignore plugin goal</em> above). Which removes the error marker.</p><h2>Eclipse 4.2 Adds Default Mapping</h2><p>If you are using Eclipse 4.2 and have troubles with mapping and won't put mess into yours pom.xml create new file lifecycle-mapping-metadata.xml configure it in <strong>Windows -&gt; Preferences -&gt; Maven -&gt; Lifecycle mapping</strong> . (don't forget press <em>Reload workspace lifecycle mappings metadata</em> after each change of this file!).</p><p>If you have multiple Eclipse workspaces and/or work in a team, it is easy to get workspace-level configuration out-of-sync. This is unlikely to cause any confusion for &lt;ignore /&gt; mappings, but for &lt;execute /&gt; and &lt;configurator /&gt; mappings configuration in pom.xml or maven-plugin is strongly recommended.</p><p>Here is example based on eclipse/plugins/org.eclipse.m2e.lifecyclemapping.defaults_1.2.0.20120903-1050.jar/lifecycle-mapping-metadata.xml</p>
+<div class="highlight"><pre><a name="line-%s"></a>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<a name="line-%s"></a>&lt;lifecycleMappingMetadata&gt;
+<a name="line-%s"></a>  &lt;pluginExecutions&gt;
+<a name="line-%s"></a>    &lt;pluginExecution&gt;
+<a name="line-%s"></a>      &lt;pluginExecutionFilter&gt;
+<a name="line-%s"></a>        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+<a name="line-%s"></a>        &lt;artifactId&gt;buildnumber-maven-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>        &lt;goals&gt;
+<a name="line-%s"></a>          &lt;goal&gt;create-timestamp&lt;/goal&gt;
+<a name="line-%s"></a>        &lt;/goals&gt;
+<a name="line-%s"></a>        &lt;versionRange&gt;[0.0,)&lt;/versionRange&gt;
+<a name="line-%s"></a>      &lt;/pluginExecutionFilter&gt;
+<a name="line-%s"></a>      &lt;action&gt;
+<a name="line-%s"></a>        &lt;ignore /&gt;
+<a name="line-%s"></a>      &lt;/action&gt;
+<a name="line-%s"></a>    &lt;/pluginExecution&gt;
+<a name="line-%s"></a>
+<a name="line-%s"></a>    &lt;pluginExecution&gt;
+<a name="line-%s"></a>      &lt;pluginExecutionFilter&gt;
+<a name="line-%s"></a>        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+<a name="line-%s"></a>        &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>        &lt;goals&gt;
+<a name="line-%s"></a>          &lt;goal&gt;list&lt;/goal&gt;
+<a name="line-%s"></a>        &lt;/goals&gt;
+<a name="line-%s"></a>        &lt;versionRange&gt;[0.0,)&lt;/versionRange&gt;
+<a name="line-%s"></a>      &lt;/pluginExecutionFilter&gt;
+<a name="line-%s"></a>      &lt;action&gt;
+<a name="line-%s"></a>        &lt;ignore /&gt;
+<a name="line-%s"></a>      &lt;/action&gt;
+<a name="line-%s"></a>    &lt;/pluginExecution&gt;
+<a name="line-%s"></a>
+<a name="line-%s"></a>    &lt;pluginExecution&gt;
+<a name="line-%s"></a>      &lt;pluginExecutionFilter&gt;
+<a name="line-%s"></a>        &lt;groupId&gt;org.zeroturnaround&lt;/groupId&gt;
+<a name="line-%s"></a>        &lt;artifactId&gt;jrebel-maven-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>        &lt;goals&gt;
+<a name="line-%s"></a>          &lt;goal&gt;generate&lt;/goal&gt;
+<a name="line-%s"></a>        &lt;/goals&gt;
+<a name="line-%s"></a>        &lt;versionRange&gt;[0.0,)&lt;/versionRange&gt;
+<a name="line-%s"></a>      &lt;/pluginExecutionFilter&gt;
+<a name="line-%s"></a>      &lt;action&gt;
+<a name="line-%s"></a>        &lt;ignore /&gt;
+<a name="line-%s"></a>      &lt;/action&gt;
+<a name="line-%s"></a>    &lt;/pluginExecution&gt;
+<a name="line-%s"></a>
+<a name="line-%s"></a>    &lt;pluginExecution&gt;
+<a name="line-%s"></a>      &lt;pluginExecutionFilter&gt;
+<a name="line-%s"></a>        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+<a name="line-%s"></a>        &lt;artifactId&gt;gwt-maven-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>        &lt;goals&gt;
+<a name="line-%s"></a>          &lt;goal&gt;compile&lt;/goal&gt;
+<a name="line-%s"></a>        &lt;/goals&gt;
+<a name="line-%s"></a>        &lt;versionRange&gt;[0.0,)&lt;/versionRange&gt;
+<a name="line-%s"></a>      &lt;/pluginExecutionFilter&gt;
+<a name="line-%s"></a>      &lt;action&gt;
+<a name="line-%s"></a>        &lt;ignore /&gt;
+<a name="line-%s"></a>      &lt;/action&gt;
+<a name="line-%s"></a>    &lt;/pluginExecution&gt;
+<a name="line-%s"></a>
+<a name="line-%s"></a>    &lt;pluginExecution&gt;
+<a name="line-%s"></a>      &lt;pluginExecutionFilter&gt;
+<a name="line-%s"></a>        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+<a name="line-%s"></a>        &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>        &lt;goals&gt;
+<a name="line-%s"></a>          &lt;goal&gt;copy-dependencies&lt;/goal&gt;
+<a name="line-%s"></a>          &lt;goal&gt;unpack&lt;/goal&gt;
+<a name="line-%s"></a>        &lt;/goals&gt;
+<a name="line-%s"></a>        &lt;versionRange&gt;[0.0,)&lt;/versionRange&gt;
+<a name="line-%s"></a>      &lt;/pluginExecutionFilter&gt;
+<a name="line-%s"></a>      &lt;action&gt;
+<a name="line-%s"></a>        &lt;ignore /&gt;
+<a name="line-%s"></a>      &lt;/action&gt;
+<a name="line-%s"></a>    &lt;/pluginExecution&gt;
+<a name="line-%s"></a>
+<a name="line-%s"></a>  &lt;/pluginExecutions&gt;
+<a name="line-%s"></a>&lt;/lifecycleMappingMetadata&gt;
+</pre></div>
+  </div>
+</div>
+      </div><!-- END container -->
+    </div><!-- END wrap -->
+    
+        <div class="stickyFooter">
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 md-margin-bottom-40"></div><!--/col-md-4-->
+            <div class="col-md-4 md-margin-bottom-40">            </div>
+            <div class="col-md-4">              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="copyright-space">
+                <a href="https://www.eclipse.org/">Home</a> | <a href="https://www.eclipse.org/legal/privacy.php">Privacy Policy</a> | <a href="https://www.eclipse.org/legal/termsofuse.php">Terms of Use</a> | <a href="https://www.eclipse.org/legal/copyright.php">Copyright Agent</a> | <a href="https://www.eclipse.org/legal/">Legal</a> | <a href="https://www.eclipse.org/org/foundation/contact.php">Contact Us</a>
+              </p>
+            </div>
+            <div class="col-md-6" align="right">
+              <p class="copyright-space">
+                Copyright &copy;
+                2014 The Eclipse Foundation. All Rights Reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- JS Global Compulsory -->
+    <script type="text/javascript" src="/assets/plugins/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/hover-dropdown.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/back-to-top.js"></script>
+    <!-- JS Implementing Plugins -->
+    <script type="text/javascript" src="/assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/parallax-slider/js/modernizr.js"></script>
+    <script type="text/javascript" src="/assets/plugins/parallax-slider/js/jquery.cslider.js"></script> 
+    <!-- JS Page Level -->
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+      App.init();
+      App.initSliders();
+      Index.initParallaxSlider();
+      });
+    </script>
+    <!--[if lt IE 9]>
+        <script src="/assets/plugins/respond.js"></script>
+    <![endif]-->
+  </body>
+</html>	

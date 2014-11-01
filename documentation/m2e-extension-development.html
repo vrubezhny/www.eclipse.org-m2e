@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!-->
+<html lang="en"> <!--<![endif]-->
+  <head>
+    <title>M2Eclipse | Extension Development</title>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Takari is focused on continuous delivery for the Maven ecosystem and offers Apache Maven training classes" />
+    <meta name="author" content="takari.io" />
+    <meta property="twitter:account_id" content="4503599627980362" />  
+    
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/m2eclipse.css" />
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />        
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/assets/plugins/flexslider/flexslider.css" />
+    <link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css" />
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="/assets/css/code/syntax-highlighting.css" />
+    
+    <!-- GA -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-56202333-1', 'takari.io');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      
+            <div class="header">
+        <div class="navbar navbar-default" role="navigation">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/index.html"> 
+                <img id="logo-header" src="/assets/img/m2e_logo@2x.svg" alt="M2Eclipse" width="150" height="61" style="margin:20px 0px 10px;"/>
+              </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-responsive-collapse">
+              <ul class="nav navbar-nav navbar-left">
+              
+                  
+                  
+                  <li class="">
+                      <a href="/m2e-news.html">News</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e-downloads.html">Download</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/documentation/m2e-documentation.html">Documentation</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e-community.html">Community</a>
+                  </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div><!-- END header -->
+      
+      <div class="container" style="margin-top:20px;">
+        <div class="row">
+  <div class="col-md-3">
+    <div class="margin-bottom-30"></div>
+    <h4 class="headline">Users</h2>
+    <ul class="unstyled">
+      <li><a href="/documentation/m2e-faq.html">FAQ</a></li>
+      <li><a href="/documentation/m2e-execution-not-covered.html">Execution Not Covered</a></li>
+    </ul>  
+    <h4 class="headline">Developers</h2>
+    <ul class="unstyled">
+      <li><a href="/documentation/m2e-development-environment.html">Developement Environment Setup</a></li>
+    </ul>  
+    <h4 class="headline">Extension Developers</h2>
+    <ul class="unstyled">
+      <li><a href="/documentation/m2e-extension-development.html">Getting Started</a></li>
+    </ul>      
+    <h4 class="headline">Release Notes</h2>
+    <ul class="unstyled">
+      <li><a href="/documentation/release-notes-15.html">M2Eclipse 1.5</a></li>
+    </ul>      
+  </div>  
+  <div class="col-md-9 docs">
+  <h1>Setting up Eclipse IDE</h1>
+<ul>
+  <li>"Standard" Eclipse distribution 4.3 or newer from <a href="http://www.eclipse.org/downloads/">http://www.eclipse.org/downloads/</a></li>
+  <li>m2e 1.4 or newer from <a href="http://download.eclipse.org/technology/m2e/releases/">http://download.eclipse.org/technology/m2e/releases/</a>, including semi-hidden m2e SDK feature (uncheck "Group items by category" to see it)</li>
+</ul><p><img src="/assets/img/m2e-sdk-install.png" alt="SDK""/></p><h2>Command line build</h2><p>Download and unpack to a local folder Maven 3.0.3 or better available from <a href="http://maven.apache.org/download.html">http://maven.apache.org/download.html</a></p><h1>Prerequisites</h1><p>Some OSGi bundle development and PDE knowledge is assumed.</p>
+<ul>
+  <li>Doc: <a href="http://help.eclipse.org/luna/index.jsp?topic=/org.eclipse.pde.doc.user/guide/intro/pde_overview.htm">http://help.eclipse.org/luna/index.jsp?topic=/org.eclipse.pde.doc.user/guide/intro/pde_overview.htm</a></li>
+  <li>Getting Started: <a href="http://www.eclipse.org/articles/Article-PDE-does-plugins/PDE-intro.html">http://www.eclipse.org/articles/Article-PDE-does-plugins/PDE-intro.html</a></li>
+  <li>Lars Vogel Tutorial:<a href="http://www.vogella.de/articles/EclipsePlugIn/article.html">http://www.vogella.de/articles/EclipsePlugIn/article.html</a></li>
+</ul><h2>Java code generation overview</h2><p>Although there are no strict rules, usually maven java code generation plugins like antlr3-maven-plugin or maven-jaxb-plugin take one or more input files from project source tree and generate a number java source files in a subdirectory of target/generated-sources/ directory. These generated sources are usually required to compile and/or run project tests.</p><p>To properly support code generation inside Eclipse IDE workspace, the IDE generally needs to perform some configuration (semi) statically during project import and then do actually code generation either on request or automatically as part of workspace build.</p><p>m2e extension that provides support for generation will typically need to:</p>
+<ul>
+  <li>implement a subclass of org.eclipse.m2e.jdt.AbstractJavaProjectConfigurator to perform necessary project configuration</li>
+  <li>implement subclass of MojoExecutionBuildParticipant to delegate actual code generation to underlying maven plugin goal</li>
+  <li>provide metadata to register the project configurator with m2e and to map maven plugin execution to the project configurator</li>
+</ul><h2>m2e/antlr3 code generation support explained</h2><p>As an example, here is explanation of how different parts of <a href="https://github.com/sonatype/m2eclipse-extras/tree/0.13.0.20110622-1538/org.sonatype.m2e.antlr">m2e/antlr</a> fit together.</p><p>On command line, <a href="http://www.antlr.org/antlr3-maven-plugin/usage.html">antlr3-maven-plugin</a>, reads ANTLR grammar files from directory specified by ${sourceDirectory} plugin configuration parameter (defaults to src/main/antlr3) and generates output files in directory specified by ${outputDirectory} plugin configuration parameter (defaults to target/generated-sources/antlr3).</p><h2><a href="https://github.com/sonatype/m2eclipse-extras/blob/0.13.0.20110622-1538/org.sonatype.m2e.antlr/src/org/sonatype/m2e/antlr/internal/AntlrProjectConfigurator.java">AntlrProjectConfigurator</a> and corresponding metadata</h2><p><a href="http://git.eclipse.org/c/m2e/m2e-core.git/tree/org.eclipse.m2e.jdt/src/org/eclipse/m2e/jdt/AbstractJavaProjectConfigurator.java?id=releases/1.0/1.0.0.20110607-2117">AbstractJavaProjectConfigurator</a> is a convenience abstract implementation of AbstractProjectConfigurator that provides default behaviour common to many java code generation m2e extensions. AbstractJavaProjectConfigurator assumes single additional java source folder needs to be configured for the project and the source folder location is defined by ${outputDirectory} maven plugin configuration parameter. This allows very simple ANTLR project configurator implementation (is explained below)</p>
+<div class="highlight"><pre><a name="line-%s"></a>public class AntlrProjectConfigurator extends AbstractJavaProjectConfigurator {
+<a name="line-%s"></a>  @Override
+<a name="line-%s"></a>  public AbstractBuildParticipant getBuildParticipant(IMavenProjectFacade projectFacade, 
+<a name="line-%s"></a>                                                      MojoExecution execution, 
+<a name="line-%s"></a>                                                      IPluginExecutionMetadata executionMetadata) {
+<a name="line-%s"></a>    return new AntlrBuildParticipant(execution);
+<a name="line-%s"></a>  }
+<a name="line-%s"></a>}
+</pre></div><p>The follow extension in plugin.xml registers ANTLR project configurator with m2e</p>
+<div class="highlight"><pre><a name="line-%s"></a>&lt;extension point=&quot;org.eclipse.m2e.core.projectConfigurators&quot;&gt;
+<a name="line-%s"></a>  &lt;configurator
+<a name="line-%s"></a>    class=&quot;org.sonatype.m2e.antlr.internal.AntlrProjectConfigurator&quot; 
+<a name="line-%s"></a>    id=&quot;org.sonatype.m2e.antlr.antlrConfigurator&quot;
+<a name="line-%s"></a>    name=&quot;ANTLR Project Configurator&quot;&gt;
+<a name="line-%s"></a>  &lt;/configurator&gt;
+<a name="line-%s"></a>&lt;/extension&gt;
+</pre></div><p>lifecycle-mapping-metadata.xml located at the root of the project (and at the root of OSGi bundle jar at runtime) maps antlr3-maven-plugin antlr goal to ANTLR project configurator. Note that configurator id in the mapping matches configurator id defined in the extension point above.</p>
+<div class="highlight"><pre><a name="line-%s"></a>&lt;lifecycleMappingMetadata&gt;
+<a name="line-%s"></a>   &lt;pluginExecutions&gt;
+<a name="line-%s"></a>     &lt;pluginExecution&gt;
+<a name="line-%s"></a>       &lt;pluginExecutionFilter&gt;
+<a name="line-%s"></a>         &lt;groupId&gt;org.antlr&lt;/groupId&gt;
+<a name="line-%s"></a>         &lt;artifactId&gt;antlr3-maven-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>         &lt;versionRange&gt;[3.1.1,)&lt;/versionRange&gt;
+<a name="line-%s"></a>          &lt;goals&gt;
+<a name="line-%s"></a>            &lt;goal&gt;antlr&lt;/goal&gt;
+<a name="line-%s"></a>          &lt;/goals&gt;
+<a name="line-%s"></a>       &lt;/pluginExecutionFilter&gt;
+<a name="line-%s"></a>       &lt;action&gt;
+<a name="line-%s"></a>         &lt;configurator&gt;
+<a name="line-%s"></a>           &lt;id&gt;org.sonatype.m2e.antlr.antlrConfigurator&lt;/id&gt;
+<a name="line-%s"></a>         &lt;/configurator&gt;
+<a name="line-%s"></a>       &lt;/action&gt;
+<a name="line-%s"></a>     &lt;/pluginExecution&gt;
+<a name="line-%s"></a>   &lt;/pluginExecutions&gt;
+<a name="line-%s"></a>&lt;/lifecycleMappingMetadata&gt;
+</pre></div><p>And finally, the following extension in plugin.xml registers m2e extension as lifecycle mapping metadata source with m2e. This is mostly needed as performance optimization, because without this extension m2e would have to search lifecycle-mapping-metadata.xml file in all installed eclipse plugins.</p>
+<div class="highlight"><pre><a name="line-%s"></a>&lt;extension
+<a name="line-%s"></a>  point=&quot;org.eclipse.m2e.core.lifecycleMappingMetadataSource&quot;&gt;
+<a name="line-%s"></a>&lt;/extension&gt;
+</pre></div><h3><a href="https://github.com/sonatype/m2eclipse-extras/blob/0.13.0.20110622-1538/org.sonatype.m2e.antlr/src/org/sonatype/m2e/antlr/internal/AntlrBuildParticipant.java">AntlrBuildParticipant</a></h3><p>AntlrBuildParticipant generates java source files (any resources generated by ANTLR, to be precise) during eclipse incremental and full builds.</p><p>First AntlrBuildParticipant checks if any of the grammar files have changed and short-cuts code generation if there were no changes.</p>
+<div class="highlight"><pre><a name="line-%s"></a>  File source = maven.getMojoParameterValue(getSession(), getMojoExecution(), &quot;sourceDirectory&quot;, File.class);
+<a name="line-%s"></a>  Scanner ds = buildContext.newScanner( source ); // delta or full scanner
+<a name="line-%s"></a>  ds.scan();
+<a name="line-%s"></a>  String[] includedFiles = ds.getIncludedFiles();
+<a name="line-%s"></a>  if (includedFiles == null || includedFiles.length &lt;= 0 ) {
+<a name="line-%s"></a>    return null;
+<a name="line-%s"></a>  }
+</pre></div><p>Then, AntlrBuildParticipant delegates to MojoExecutionBuildParticipant.build to execute antlr3-maven-plugin antlr goal. This generates resources on filesystem, but does not update eclipse workspace</p>
+<div class="highlight"><pre><a name="line-%s"></a>       Set&lt;IProject&gt; result = super.build( kind, monitor );
+<a name="line-%s"></a>
+<a name="line-%s"></a>Finally, AntlrBuildParticipant refreshes generation output folder in
+<a name="line-%s"></a>workspace
+<a name="line-%s"></a>
+<a name="line-%s"></a>       File generated = maven.getMojoParameterValue(getSession(), getMojoExecution(), &quot;outputDirectory&quot;, File.class);
+<a name="line-%s"></a>       if (generated != null) {
+<a name="line-%s"></a>           buildContext.refresh( generated );
+<a name="line-%s"></a>       }
+</pre></div><h3>Testing m2e/antlr code generation support</h3><p><a href="https://github.com/sonatype/m2eclipse-extras/tree/0.13.0.20110622-1538/org.sonatype.m2e.antlr.tests/projects/antlr/antlr-v3-p001">Test project</a> is setup to fail java compilation if workspace project source folders were not properly configured or ANTLR code generation did not succeed for whatever reason. <a href="https://github.com/sonatype/m2eclipse-extras/blob/0.13.0.20110622-1538/org.sonatype.m2e.antlr.tests/src/org/sonatype/m2e/antlr/tests/AntlrGenerationTest.java">AntlrGenerationTest.java</a> performs very basic tests to make sure that m2e/antlrv3 integration is not obviously broken.</p><p>Import the test project and wait for all background processing triggered by the new project to finish. Even though the test does not assert this, the workspace project should be fully configured at this point</p>
+<div class="highlight"><pre><a name="line-%s"></a>       ResolverConfiguration configuration = new ResolverConfiguration();
+<a name="line-%s"></a>       IProject project1 = importProject( &quot;projects/antlr/antlr-v3-p001/pom.xml&quot;, configuration );
+<a name="line-%s"></a>       waitForJobsToComplete();
+</pre></div><p>: To make sure no state is retained from one test run to the next,  #importProject always creates new/fresh copy of the test project  under target/test workspace location; the copy is removed by the  test tearDown logic.</p><p>Automatic workspace build is disable during m2e extensions tests by default, so the build needs to be run explicitly from the test code.</p>
+<div class="highlight"><pre><a name="line-%s"></a>       project1.build( IncrementalProjectBuilder.FULL_BUILD, monitor );
+<a name="line-%s"></a>       project1.build( IncrementalProjectBuilder.INCREMENTAL_BUILD, monitor );
+<a name="line-%s"></a>       waitForJobsToComplete();
+</pre></div><p>: Note that there are two calls to IProject.build. First, full, build  will generate the code. Second, incremental, build will give JDT  Java builder the chance to compile the generated code. This matches  how java code generation is handled by a "real" eclipse workspace,  so it is therefore important that AntlrBuildParticipant performs  code generation only when source grammar files change, otherwise  workspace build will keep restarting itself forever.</p><p>At this point the project should be fully configured, the code should be generated and both generated code should be compiled without errors. Lets assert all that</p>
+<div class="highlight"><pre><a name="line-%s"></a>       assertNoErrors( project1 );
+<a name="line-%s"></a>
+<a name="line-%s"></a>       IJavaProject javaProject1 = JavaCore.create( project1 );
+<a name="line-%s"></a>       IClasspathEntry[] cp1 = javaProject1.getRawClasspath();
+<a name="line-%s"></a>
+<a name="line-%s"></a>       assertEquals( new Path( &quot;/antlr-p001/target/generated-sources/antlr&quot; ), cp1[3].getPath() );
+<a name="line-%s"></a>
+<a name="line-%s"></a>       assertTrue( project1.getFile( &quot;target/generated-sources/antlr/test/SampleParser.java&quot; ).isSynchronized( IResource.DEPTH_ZERO ) );
+<a name="line-%s"></a>       assertTrue( project1.getFile( &quot;target/generated-sources/antlr/test/SampleParser.java&quot; ).isAccessible() );
+</pre></div><p>TODO add code to assert that expected .class files were created</p><h2>Building the code and generating p2 repository</h2><p>This section is not meant as a substitute for Tycho tutorials and documentation, but rather as suggested m2e extension source tree layout and build setup. Explanation is based on <a href="https://github.com/sonatype/m2eclipse-egit/tree/0.13.0.20110628-2018">m2eclipse-egit</a> project.</p><h3>Project directory structure overview</h3>
+<div class="highlight"><pre><a name="line-%s"></a> m2eclipse-egit/                      &lt;= project basedir, all project files are under this directory
+<a name="line-%s"></a>   org.sonatype.m2e.egit/             &lt;= main bundle project
+<a name="line-%s"></a>     src/
+<a name="line-%s"></a>     pom.xml
+<a name="line-%s"></a>   org.sonatype.m2e.egit.feature/     &lt;= eclipse feature project
+<a name="line-%s"></a>     src/
+<a name="line-%s"></a>     pom.xml
+<a name="line-%s"></a>   org.sonatype.m2e.egit.tests/       &lt;= automated tests (optional, but highly recommended)
+<a name="line-%s"></a>     feature.xml
+<a name="line-%s"></a>     pom.xml
+<a name="line-%s"></a>   pom.xml                            &lt;= aggregator/parent pom.xml
+</pre></div><h3>Parent pom.xml</h3><p>This pom.xml snippet tells Maven to enable Tycho for all modules of this project.</p>
+<div class="highlight"><pre><a name="line-%s"></a> ...
+<a name="line-%s"></a> &lt;build&gt;
+<a name="line-%s"></a>   &lt;plugins&gt;
+<a name="line-%s"></a>     &lt;plugin&gt;
+<a name="line-%s"></a>       &lt;groupId&gt;org.eclipse.tycho&lt;/groupId&gt;
+<a name="line-%s"></a>       &lt;artifactId&gt;tycho-maven-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>       &lt;version&gt;${tycho-version}&lt;/version&gt;
+<a name="line-%s"></a>       &lt;extensions&gt;true&lt;/extensions&gt;
+<a name="line-%s"></a>     &lt;/plugin&gt;
+<a name="line-%s"></a>   &lt;/plugins&gt;
+<a name="line-%s"></a> ...
+</pre></div><p>This snippet configures p2 repositories that will be used to resolve project dependencies. Indigo release repository does not include m2e org.eclipse.m2e.tests.common, so m2e release repository is specified separately.</p>
+<div class="highlight"><pre><a name="line-%s"></a> ...
+<a name="line-%s"></a> &lt;repositories&gt;
+<a name="line-%s"></a>   &lt;repository&gt;
+<a name="line-%s"></a>     &lt;id&gt;eclipse&lt;/id&gt;
+<a name="line-%s"></a>     &lt;url&gt;[http://download.eclipse.org/releases/indigo](http://download.eclipse.org/releases/indigo)&lt;/url&gt;
+<a name="line-%s"></a>     &lt;layout&gt;p2&lt;/layout&gt;
+<a name="line-%s"></a>   &lt;/repository&gt;
+<a name="line-%s"></a>   &lt;repository&gt;
+<a name="line-%s"></a>     &lt;id&gt;m2e&lt;/id&gt;
+<a name="line-%s"></a>     &lt;url&gt;[http://download.eclipse.org/technology/m2e/releases/1.0](http://download.eclipse.org/technology/m2e/releases/1.0)&lt;/url&gt;
+<a name="line-%s"></a>     &lt;layout&gt;p2&lt;/layout&gt;
+<a name="line-%s"></a>   &lt;/repository&gt;
+<a name="line-%s"></a> &lt;/repositories&gt;
+<a name="line-%s"></a> ...
+</pre></div><h3>org.sonatype.m2e.egit and org.sonatype.m2e.egit.tests</h3><p>org.sonatype.m2e.egit and org.sonatype.m2e.egit.tests are conventional PDE Plug-In projects and only requires minimal pom.xml file.</p>
+<div class="highlight"><pre><a name="line-%s"></a> &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+<a name="line-%s"></a>    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+<a name="line-%s"></a>   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+<a name="line-%s"></a> 
+<a name="line-%s"></a>   &lt;parent&gt;
+<a name="line-%s"></a>     &lt;groupId&gt;org.sonatype.m2e.egit&lt;/groupId&gt;
+<a name="line-%s"></a>     &lt;artifactId&gt;org.sonatype.m2e.egit.parent&lt;/artifactId&gt;
+<a name="line-%s"></a>     &lt;version&gt;0.14.0-SNAPSHOT&lt;/version&gt;
+<a name="line-%s"></a>   &lt;/parent&gt;
+<a name="line-%s"></a> 
+<a name="line-%s"></a>   &lt;artifactId&gt;org.sonatype.m2e.egit&lt;/artifactId&gt;
+<a name="line-%s"></a>   &lt;packaging&gt;eclipse-plugin&lt;/packaging&gt;
+<a name="line-%s"></a> 
+<a name="line-%s"></a>   &lt;name&gt;Maven SCM Handler for EGit Plug-in&lt;/name&gt;
+<a name="line-%s"></a> 
+<a name="line-%s"></a> &lt;/project&gt;
+</pre></div><p>There is, however, tycho-surefire-plugin configuration in the parent pom that affects test execution.</p><h3>org.sonatype.m2e.egit.feature</h3><p>org.sonatype.m2e.egit.feature is a PDE Feature project and it serves two purposes. It defines Eclipse Feature that can be installed using p2 installation GUI (it is not possible to install individual bundles). It also generates and optionally deploys to a remote server p2 repository containing the feature and the main bundle.</p><p>feature.xml, feature.properties and license.html files in the root of the project define contents of the feature. This is standard eclipse fare and regular PDE documentation fully applies. Beware that a feature must provide correct license information to be accepted to m2e marketplace catalog.</p><p>p2 repository generation is configured in pom.xml with additional configuration provided via category.xml file located in the root of the project. Additionally, repository zip file contents is controlled by src/main/assembly/assembly.xml.</p><p>Specifically</p><p>Aggregate feature's "included" dependencies under conventional target/site directory.</p>
+<div class="highlight"><pre><a name="line-%s"></a>     &lt;plugin&gt;
+<a name="line-%s"></a>       &lt;groupId&gt;org.eclipse.tycho&lt;/groupId&gt;
+<a name="line-%s"></a>       &lt;artifactId&gt;tycho-packaging-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>       &lt;version&gt;${tycho-version}&lt;/version&gt;
+<a name="line-%s"></a>       &lt;configuration&gt;
+<a name="line-%s"></a>         &lt;deployableFeature&gt;true&lt;/deployableFeature&gt;
+<a name="line-%s"></a>       &lt;/configuration&gt;
+<a name="line-%s"></a>     &lt;/plugin&gt;
+</pre></div><p>Generate p2 repository metadata for artifacts collected in target/site.</p>
+<div class="highlight"><pre><a name="line-%s"></a>     &lt;plugin&gt;
+<a name="line-%s"></a>       &lt;groupId&gt;org.eclipse.tycho&lt;/groupId&gt;
+<a name="line-%s"></a>       &lt;artifactId&gt;tycho-p2-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>       &lt;version&gt;${tycho-version}&lt;/version&gt;
+<a name="line-%s"></a>       &lt;executions&gt;
+<a name="line-%s"></a>         &lt;execution&gt;
+<a name="line-%s"></a>           &lt;id&gt;categorization&lt;/id&gt;
+<a name="line-%s"></a>           &lt;phase&gt;package&lt;/phase&gt;
+<a name="line-%s"></a>           &lt;goals&gt;
+<a name="line-%s"></a>             &lt;goal&gt;category-p2-metadata&lt;/goal&gt;
+<a name="line-%s"></a>           &lt;/goals&gt;
+<a name="line-%s"></a>         &lt;/execution&gt;
+<a name="line-%s"></a>       &lt;/executions&gt;
+<a name="line-%s"></a>       &lt;configuration&gt;
+<a name="line-%s"></a>         &lt;metadataRepositoryName&gt;Maven SCM Handler for EGit&lt;/metadataRepositoryName&gt;
+<a name="line-%s"></a>         &lt;artifactRepositoryName&gt;Maven SCM Handler for EGit&lt;/artifactRepositoryName&gt;
+<a name="line-%s"></a>       &lt;/configuration&gt;
+<a name="line-%s"></a>     &lt;/plugin&gt;
+</pre></div><p>By convention, p2 repository category information comes from category.xml file.</p>
+<div class="highlight"><pre><a name="line-%s"></a> &lt;site&gt;
+<a name="line-%s"></a>    &lt;feature url=&quot;features/org.sonatype.m2e.egit.feature_0.0.0.qualifier.jar&quot; id=&quot;org.sonatype.m2e.egit.feature&quot; version=&quot;0.0.0.qualifier&quot;&gt;
+<a name="line-%s"></a>       &lt;category name=&quot;m2eclipse-egit&quot;/&gt;
+<a name="line-%s"></a>    &lt;/feature&gt;
+<a name="line-%s"></a>    &lt;category-def name=&quot;m2eclipse-egit&quot; label=&quot;Maven SCM Handler for EGit&quot;/&gt;
+<a name="line-%s"></a> &lt;/site&gt;
+</pre></div><p>Create p2 repository zip file.</p>
+<div class="highlight"><pre><a name="line-%s"></a>     &lt;plugin&gt;
+<a name="line-%s"></a>       &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+<a name="line-%s"></a>       &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+<a name="line-%s"></a>       &lt;configuration&gt;
+<a name="line-%s"></a>         &lt;descriptors&gt;
+<a name="line-%s"></a>           &lt;descriptor&gt;src/main/assembly/assembly.xml&lt;/descriptor&gt;
+<a name="line-%s"></a>         &lt;/descriptors&gt;
+<a name="line-%s"></a>       &lt;/configuration&gt;
+<a name="line-%s"></a>       &lt;executions&gt;
+<a name="line-%s"></a>         &lt;execution&gt;
+<a name="line-%s"></a>           &lt;id&gt;make-assembly&lt;/id&gt; 
+<a name="line-%s"></a>           &lt;phase&gt;package&lt;/phase&gt; 
+<a name="line-%s"></a>           &lt;goals&gt;
+<a name="line-%s"></a>             &lt;goal&gt;single&lt;/goal&gt; 
+<a name="line-%s"></a>           &lt;/goals&gt;
+<a name="line-%s"></a>         &lt;/execution&gt;
+<a name="line-%s"></a>       &lt;/executions&gt;
+<a name="line-%s"></a>     &lt;/plugin&gt;
+</pre></div><p>... using assembly descriptor src/main/assembly/assembly.xml</p>
+<div class="highlight"><pre><a name="line-%s"></a> &lt;assembly&gt;
+<a name="line-%s"></a>   &lt;id&gt;site&lt;/id&gt;
+<a name="line-%s"></a>   &lt;formats&gt;
+<a name="line-%s"></a>     &lt;format&gt;zip&lt;/format&gt;
+<a name="line-%s"></a>   &lt;/formats&gt;
+<a name="line-%s"></a>   &lt;includeBaseDirectory&gt;false&lt;/includeBaseDirectory&gt;
+<a name="line-%s"></a>   &lt;fileSets&gt;
+<a name="line-%s"></a>     &lt;fileSet&gt;
+<a name="line-%s"></a>       &lt;directory&gt;${project.build.directory}/site&lt;/directory&gt;
+<a name="line-%s"></a>       &lt;outputDirectory&gt;/&lt;/outputDirectory&gt;
+<a name="line-%s"></a>     &lt;/fileSet&gt;
+<a name="line-%s"></a>   &lt;/fileSets&gt;
+<a name="line-%s"></a> &lt;/assembly&gt;
+</pre></div><h3>Publishing p2 repository</h3><p>TBD</p>
+<hr/>
+  </div>
+</div>
+      </div><!-- END container -->
+    </div><!-- END wrap -->
+    
+        <div class="stickyFooter">
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 md-margin-bottom-40"></div><!--/col-md-4-->
+            <div class="col-md-4 md-margin-bottom-40">            </div>
+            <div class="col-md-4">              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="copyright-space">
+                <a href="https://www.eclipse.org/">Home</a> | <a href="https://www.eclipse.org/legal/privacy.php">Privacy Policy</a> | <a href="https://www.eclipse.org/legal/termsofuse.php">Terms of Use</a> | <a href="https://www.eclipse.org/legal/copyright.php">Copyright Agent</a> | <a href="https://www.eclipse.org/legal/">Legal</a> | <a href="https://www.eclipse.org/org/foundation/contact.php">Contact Us</a>
+              </p>
+            </div>
+            <div class="col-md-6" align="right">
+              <p class="copyright-space">
+                Copyright &copy;
+                2014 The Eclipse Foundation. All Rights Reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- JS Global Compulsory -->
+    <script type="text/javascript" src="/assets/plugins/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/hover-dropdown.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/back-to-top.js"></script>
+    <!-- JS Implementing Plugins -->
+    <script type="text/javascript" src="/assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/parallax-slider/js/modernizr.js"></script>
+    <script type="text/javascript" src="/assets/plugins/parallax-slider/js/jquery.cslider.js"></script> 
+    <!-- JS Page Level -->
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+      App.init();
+      App.initSliders();
+      Index.initParallaxSlider();
+      });
+    </script>
+    <!--[if lt IE 9]>
+        <script src="/assets/plugins/respond.js"></script>
+    <![endif]-->
+  </body>
+</html>	
