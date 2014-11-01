@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?> 
 <?xml-stylesheet type="text/xsl" href="project-plan-render.xsl"?>
 <!--?xml-stylesheet type="text/xsl" href="project-plan-render.xsl"?-->
+<!-- Transfer -->
 <p:plan xmlns:p="http://www.eclipse.org/project/plan" xmlns="http://www.w3.org/1999/xhtml">
   <p:release projectid="m2e" version="1.5.0"/>
   <p:introduction>
