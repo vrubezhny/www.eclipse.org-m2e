@@ -396,7 +396,7 @@ tbody > tr:nth-child(even) > th {
   margin:10px 0px 30px; }
 
 .buttonBG h2 {
-  background: url('/assets/img/m2e_buttonBG.png');
+  background: url('/m2e/assets/img/m2e_buttonBG.png');
   border:1px solid #fed34d;
   color:#001b48;
   font-size:20px;
@@ -404,7 +404,7 @@ tbody > tr:nth-child(even) > th {
   text-align:center; }
 
 .buttonBG h2:hover {
-  background: url('/assets/img/m2e_buttonBGhover.png');
+  background: url('/m2e/assets/img/m2e_buttonBGhover.png');
   color:#001b48;
   text-decoration:none; }
  
@@ -414,7 +414,7 @@ tbody > tr:nth-child(even) > th {
   margin:0px; }
       
 .background {
-  background: url('/assets/img/m2e_background.jpg');
+  background: url('/m2e/assets/img/m2e_background.jpg');
   background-size: 1170px 366px;
   background-repeat:no-repeat;
   font-size:18px; 
