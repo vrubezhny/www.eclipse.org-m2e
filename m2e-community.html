@@ -8,30 +8,23 @@
     <!-- Meta -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Takari is focused on continuous delivery for the Maven ecosystem and offers Apache Maven training classes" />
-    <meta name="author" content="takari.io" />
-    <meta property="twitter:account_id" content="4503599627980362" />  
-    
+    <meta name="description" content="M2Eclipse provides tight integration for Apache Maven into the Eclipse IDE." />
+    <meta name="author" content="eclipse.org" />
+    <meta property="twitter:account_id" content="15710507" />      
     <!-- CSS Global Compulsory-->
     <link rel="stylesheet" href="/m2e/assets/plugins/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="/m2e/assets/css/style.css" />
     <link rel="stylesheet" href="/m2e/assets/css/m2eclipse.css" />
     <link rel="shortcut icon" href="/m2e/assets/img/favicon.ico" />        
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="/m2e/assets/plugins/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="/m2e/assets/plugins/flexslider/flexslider.css" />
-    <link rel="stylesheet" href="/m2e/assets/plugins/parallax-slider/css/parallax-slider.css" />
-    <!-- Syntax Highlighting -->
-    <link rel="stylesheet" href="/m2e/assets/css/code/syntax-highlighting.css" />
-    
+    <link rel="stylesheet" href="/m2e/assets/plugins/font-awesome/css/font-awesome.css" />    
     <!-- GA -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-56202333-1', 'takari.io');
+      ga('create', 'UA-56202333-1', 'eclipse.org');
       ga('send', 'pageview');
 
     </script>
@@ -123,7 +116,7 @@
 </div>
 <div class="row"> 
   <div class="col-md-8">
-    <h3>Project Committers</h3>
+    <h3><a href="#project-committers" name="project-committers">Project Committers</a></h3>
 <ul>
   <li><a href="https://github.com/ifedorenko">Igor Fedorenko</a></li>
   <li><a href="https://twitter.com/fbricon">Fred Bricon</a></li>
@@ -175,19 +168,12 @@
     <script type="text/javascript" src="/m2e/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/m2e/assets/plugins/hover-dropdown.min.js"></script>
     <script type="text/javascript" src="/m2e/assets/plugins/back-to-top.js"></script>
-    <!-- JS Implementing Plugins -->
-    <script type="text/javascript" src="/m2e/assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" src="/m2e/assets/plugins/parallax-slider/js/modernizr.js"></script>
-    <script type="text/javascript" src="/m2e/assets/plugins/parallax-slider/js/jquery.cslider.js"></script> 
-    <!-- JS Page Level -->
-    <script type="text/javascript" src="/m2e/assets/js/app.js"></script>
-    <script type="text/javascript" src="/m2e/assets/js/index.js"></script>
+    <!-- TESTING JS -->
+    <script type="text/javascript" src="/m2e/assets/plugins/app.js"></script>
     <script type="text/javascript">
-      jQuery(document).ready(function() {
-      App.init();
-      App.initSliders();
-      Index.initParallaxSlider();
-      });
+        jQuery(document).ready(function() {
+            App.init();
+        });
     </script>
     <!--[if lt IE 9]>
         <script src="/m2e/assets/plugins/respond.js"></script>

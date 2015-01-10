@@ -8,30 +8,23 @@
     <!-- Meta -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Takari is focused on continuous delivery for the Maven ecosystem and offers Apache Maven training classes" />
-    <meta name="author" content="takari.io" />
-    <meta property="twitter:account_id" content="4503599627980362" />  
-    
+    <meta name="description" content="M2Eclipse provides tight integration for Apache Maven into the Eclipse IDE." />
+    <meta name="author" content="eclipse.org" />
+    <meta property="twitter:account_id" content="15710507" />      
     <!-- CSS Global Compulsory-->
     <link rel="stylesheet" href="/m2e/assets/plugins/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="/m2e/assets/css/style.css" />
     <link rel="stylesheet" href="/m2e/assets/css/m2eclipse.css" />
     <link rel="shortcut icon" href="/m2e/assets/img/favicon.ico" />        
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="/m2e/assets/plugins/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="/m2e/assets/plugins/flexslider/flexslider.css" />
-    <link rel="stylesheet" href="/m2e/assets/plugins/parallax-slider/css/parallax-slider.css" />
-    <!-- Syntax Highlighting -->
-    <link rel="stylesheet" href="/m2e/assets/css/code/syntax-highlighting.css" />
-    
+    <link rel="stylesheet" href="/m2e/assets/plugins/font-awesome/css/font-awesome.css" />    
     <!-- GA -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-56202333-1', 'takari.io');
+      ga('create', 'UA-56202333-1', 'eclipse.org');
       ga('send', 'pageview');
 
     </script>
@@ -113,19 +106,23 @@
     </ul>      
   </div>  
   <div class="col-md-9 docs">
-  <h1>Development Environment Setup</h1><p>Download and unpack Eclipse latest SDK build from <a href="http://download.eclipse.org/eclipse/downloads/">http://download.eclipse.org/eclipse/downloads/</a> . The instructions below assume fresh/clean Eclipse installation.</p><p>Install M2Eclipse 1.5 or newer from <a href="http://download.eclipse.org/technology/m2e/releases">http://download.eclipse.org/technology/m2e/releases</a> . This is a P2 repository URL, use Eclipse Install UI to use it as explained in <a href="http://help.eclipse.org/topic//org.eclipse.platform.doc.user/tasks/tasks-127.htm">http://help.eclipse.org/topic//org.eclipse.platform.doc.user/tasks/tasks-127.htm</a></p><p>Clone the M2Eclipse Core repository, see <a href="https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core">https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core</a> for the list of available protocols.</p><p>Clone M2Eclipse Tests repository, see <a href="https://github.com/tesla/m2e-core-tests">https://github.com/tesla/m2e-core-tests</a> for the list of available protocols.</p><p>Import org.eclipse.m2e.workspace, m2e-core and m2e-core-tests as existing maven projects. Follow onscreen instructions, allow M2Eclipse to install additional software and restart eclipse when requested. Give Eclipse some time to update project configuration after restart. You may need to do Project/Clean.../Clean_all_projects to clear all compilation errors.</p><h2>Running M2Eclipse Automated Regression Tests from Eclipse</h2><p>Add the following memory configuration parameters to JVM startup options</p>
-<div class="highlight"><pre><a name="line-%s"></a>-XX:MaxPermSize=256m -Xmx1G
-</pre></div><p>Use JUnit Plug-in Tests launch configuration type to run/debug M2Eclipse automated regressions tests from Eclipse.</p><p>Caveat. Two tests are expected to fail when run from Eclipse</p>
+  <h1><a href="#development-environment-setup" name="development-environment-setup">Development Environment Setup</a></h1><p>Download and unpack Eclipse latest SDK build from <a href="http://download.eclipse.org/eclipse/downloads/">http://download.eclipse.org/eclipse/downloads/</a> . The instructions below assume fresh/clean Eclipse installation.</p><p>Install M2Eclipse 1.5 or newer from <a href="http://download.eclipse.org/technology/m2e/releases">http://download.eclipse.org/technology/m2e/releases</a> . This is a P2 repository URL, use Eclipse Install UI to use it as explained in <a href="http://help.eclipse.org/topic//org.eclipse.platform.doc.user/tasks/tasks-127.htm">http://help.eclipse.org/topic//org.eclipse.platform.doc.user/tasks/tasks-127.htm</a></p><p>Clone the M2Eclipse Core repository, see <a href="https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core">https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core</a> for the list of available protocols.</p><p>Clone M2Eclipse Tests repository, see <a href="https://github.com/tesla/m2e-core-tests">https://github.com/tesla/m2e-core-tests</a> for the list of available protocols.</p><p>Import org.eclipse.m2e.workspace, m2e-core and m2e-core-tests as existing maven projects. Follow onscreen instructions, allow M2Eclipse to install additional software and restart eclipse when requested. Give Eclipse some time to update project configuration after restart. You may need to do Project/Clean&hellip;/Clean_all_projects to clear all compilation errors.</p><h2><a href="#running-m2eclipse-automated-regression-tests-from-eclipse" name="running-m2eclipse-automated-regression-tests-from-eclipse">Running M2Eclipse Automated Regression Tests from Eclipse</a></h2><p>Add the following memory configuration parameters to JVM startup options</p>
+<pre class="prettyprint linenums">
+-XX:MaxPermSize=256m -Xmx1G
+</pre><p>Use JUnit Plug-in Tests launch configuration type to run/debug M2Eclipse automated regressions tests from Eclipse.</p><p>Caveat. Two tests are expected to fail when run from Eclipse</p>
 <ol>
   <li><p>ProjectRegistryManagerTest#testEnvironmentVariablesConsidered requires TEMP environment variable to be set and is expected to failed when run from Eclipse.</p></li>
   <li><p>MarkerTest#test is rather sloppy and requires elaborate launch configuration setup to limit set of m2e extensions enabled during the test.</p></li>
-</ol><p>Both tests are expected to pass on command line (see instructions below).</p><h2>Building M2Eclipse on the CLI</h2><p>Building m2e on command line is a two step process, both performed from root of m2e-core checkout directory</p><p>First, you need to <em>install</em> m2e maven runtime to local maven repository</p>
-<div class="highlight"><pre><a name="line-%s"></a>mvn clean install -f m2e-maven-runtime/pom.xml`
-</pre></div><p>Then, package M2Eclipse update site:</p>
-<div class="highlight"><pre><a name="line-%s"></a>mvn clean package
-</pre></div><p>The repository is created under org.eclipse.m2e.site/target/repository directory.</p><h2>Running M2Eclipse Automated Regression Tests on the CLI</h2><p>To run m2e automated regression tests, execute the following command from m2e-core-tests checkout directory</p>
-<div class="highlight"><pre><a name="line-%s"></a>mvn clean integration-test -Puts,its -fae -Dm2e-core.url=file://&lt;full-path-to-m2e-repository&gt;
-</pre></div><h2>Submitting Patches</h2><h3>M2Eclipse Core Sources at Eclipse.org</h3><p>M2Eclipse only accepts changes contributed via Gerrit. Here is the wiki that explains how to use it <a href="http://wiki.eclipse.org/Gerrit">http://wiki.eclipse.org/Gerrit</a> . Good luck.</p><p>According to <a href="http://www.eclipse.org/legal/EclipseLegalProcessPoster.pdf">eclipse legal poster</a>, all contributors must have signed Eclipse CLA and their bugzilla email and git commit author must match (otherwise Eclipse git server refuses contribution).</p><p>Note that M2Eclipse developers do NOT watch Gerrit submissions directly. All contributions must be referenced from corresponding bugzilla records.</p><h3>M2Eclipse Core Tests at Github</h3><p>In most cases m2e core patches will require corresponding regression tests. Changes to m2e core tests repository must be submitted as github pull requests and must be linked to bugzilla record, along with corresponding Gerrit change set.</p>
+</ol><p>Both tests are expected to pass on command line (see instructions below).</p><h2><a href="#building-m2eclipse-on-the-cli" name="building-m2eclipse-on-the-cli">Building M2Eclipse on the CLI</a></h2><p>Building m2e on command line is a two step process, both performed from root of m2e-core checkout directory</p><p>First, you need to <em>install</em> m2e maven runtime to local maven repository</p>
+<pre class="prettyprint linenums">
+mvn clean install -f m2e-maven-runtime/pom.xml`
+</pre><p>Then, package M2Eclipse update site:</p>
+<pre class="prettyprint linenums">
+mvn clean package
+</pre><p>The repository is created under org.eclipse.m2e.site/target/repository directory.</p><h2><a href="#running-m2eclipse-automated-regression-tests-on-the-cli" name="running-m2eclipse-automated-regression-tests-on-the-cli">Running M2Eclipse Automated Regression Tests on the CLI</a></h2><p>To run m2e automated regression tests, execute the following command from m2e-core-tests checkout directory</p>
+<pre class="prettyprint linenums">
+mvn clean integration-test -Puts,its -fae -Dm2e-core.url=file://&lt;full-path-to-m2e-repository&gt;
+</pre><h2><a href="#submitting-patches" name="submitting-patches">Submitting Patches</a></h2><h3>M2Eclipse Core Sources at Eclipse.org</h3><p>M2Eclipse only accepts changes contributed via Gerrit. Here is the wiki that explains how to use it <a href="http://wiki.eclipse.org/Gerrit">http://wiki.eclipse.org/Gerrit</a> . Good luck.</p><p>According to <a href="http://www.eclipse.org/legal/EclipseLegalProcessPoster.pdf">eclipse legal poster</a>, all contributors must have signed Eclipse CLA and their bugzilla email and git commit author must match (otherwise Eclipse git server refuses contribution).</p><p>Note that M2Eclipse developers do NOT watch Gerrit submissions directly. All contributions must be referenced from corresponding bugzilla records.</p><h3><a href="#m2eclipse-core-tests-at-github" name="m2eclipse-core-tests-at-github">M2Eclipse Core Tests at Github</a></h3><p>In most cases m2e core patches will require corresponding regression tests. Changes to m2e core tests repository must be submitted as github pull requests and must be linked to bugzilla record, along with corresponding Gerrit change set.</p>
   </div>
 </div>
       </div><!-- END container -->
@@ -169,19 +166,12 @@
     <script type="text/javascript" src="/m2e/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/m2e/assets/plugins/hover-dropdown.min.js"></script>
     <script type="text/javascript" src="/m2e/assets/plugins/back-to-top.js"></script>
-    <!-- JS Implementing Plugins -->
-    <script type="text/javascript" src="/m2e/assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" src="/m2e/assets/plugins/parallax-slider/js/modernizr.js"></script>
-    <script type="text/javascript" src="/m2e/assets/plugins/parallax-slider/js/jquery.cslider.js"></script> 
-    <!-- JS Page Level -->
-    <script type="text/javascript" src="/m2e/assets/js/app.js"></script>
-    <script type="text/javascript" src="/m2e/assets/js/index.js"></script>
+    <!-- TESTING JS -->
+    <script type="text/javascript" src="/m2e/assets/plugins/app.js"></script>
     <script type="text/javascript">
-      jQuery(document).ready(function() {
-      App.init();
-      App.initSliders();
-      Index.initParallaxSlider();
-      });
+        jQuery(document).ready(function() {
+            App.init();
+        });
     </script>
     <!--[if lt IE 9]>
         <script src="/m2e/assets/plugins/respond.js"></script>

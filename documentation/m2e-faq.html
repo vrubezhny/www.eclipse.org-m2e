@@ -8,30 +8,23 @@
     <!-- Meta -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Takari is focused on continuous delivery for the Maven ecosystem and offers Apache Maven training classes" />
-    <meta name="author" content="takari.io" />
-    <meta property="twitter:account_id" content="4503599627980362" />  
-    
+    <meta name="description" content="M2Eclipse provides tight integration for Apache Maven into the Eclipse IDE." />
+    <meta name="author" content="eclipse.org" />
+    <meta property="twitter:account_id" content="15710507" />      
     <!-- CSS Global Compulsory-->
     <link rel="stylesheet" href="/m2e/assets/plugins/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="/m2e/assets/css/style.css" />
     <link rel="stylesheet" href="/m2e/assets/css/m2eclipse.css" />
     <link rel="shortcut icon" href="/m2e/assets/img/favicon.ico" />        
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="/m2e/assets/plugins/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="/m2e/assets/plugins/flexslider/flexslider.css" />
-    <link rel="stylesheet" href="/m2e/assets/plugins/parallax-slider/css/parallax-slider.css" />
-    <!-- Syntax Highlighting -->
-    <link rel="stylesheet" href="/m2e/assets/css/code/syntax-highlighting.css" />
-    
+    <link rel="stylesheet" href="/m2e/assets/plugins/font-awesome/css/font-awesome.css" />    
     <!-- GA -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-56202333-1', 'takari.io');
+      ga('create', 'UA-56202333-1', 'eclipse.org');
       ga('send', 'pageview');
 
     </script>
@@ -113,60 +106,64 @@
     </ul>      
   </div>  
   <div class="col-md-9 docs">
-  <h1>FAQ (we know this needs to be updated)</h1><h2>Unable to Locate the Javac Compiler Error</h2><p>Some users reported the following error that happens when importing Maven projects or when invoking "Update Sources" action.</p>
-<div class="highlight"><pre><a name="line-%s"></a>6/25/07 1:15:44 PM CDT: ERROR mojo-execute : compiler:compile : Compilation failure
-<a name="line-%s"></a>Unable to locate the Javac Compiler in:
-<a name="line-%s"></a>C:Program FilesJavaj2re1.4.2_14..libtools.jar
-<a name="line-%s"></a>Please ensure you are using JDK 1.4 or above and
-<a name="line-%s"></a>not a JRE (the com.sun.tools.javac.Main class is required).
-<a name="line-%s"></a>In most cases you can change the location of your Java
-<a name="line-%s"></a>installation by setting the JAVA_HOME environment variable.
-</pre></div><p>That happens because those actions runs in the same JVM where Eclipse is running. If that JVM comes from JRE that isnât part of JDK, there is no Java compiler (the tools.jar) around. To workaround this you can add <code>-vm</code> argument to Eclipse command line or eclipse.ini. For Eclipse 3.3 it would look something like this:</p>
-<div class="highlight"><pre><a name="line-%s"></a>-showsplash
-<a name="line-%s"></a>org.eclipse.platform
-<a name="line-%s"></a>--launcher.XXMaxPermSize
-<a name="line-%s"></a>256m
-<a name="line-%s"></a>-vm
-<a name="line-%s"></a>C:\jdk1.6.0\bin\javaw.exe
-<a name="line-%s"></a>-vmargs
-<a name="line-%s"></a>-Xms40m
-<a name="line-%s"></a>-Xmx256m
-</pre></div><p>Alternatively you could specify compilerId in the pom.xml, so Maven won't be looking for the JDK when compiling Java code:</p>
-<div class="highlight"><pre><a name="line-%s"></a>&lt;plugin&gt;
-<a name="line-%s"></a>  &lt;artifactid&gt;maven-compiler-plugin&lt;/artifactid&gt;
-<a name="line-%s"></a>  &lt;configuration&gt;
-<a name="line-%s"></a>    &lt;compilerid&gt;eclipse&lt;/compilerid&gt;
-<a name="line-%s"></a>  &lt;/configuration&gt;
-<a name="line-%s"></a>  &lt;dependencies&gt;
-<a name="line-%s"></a>    &lt;dependency&gt;
-<a name="line-%s"></a>      &lt;groupid&gt;org.codehaus.plexus&lt;/groupid&gt;
-<a name="line-%s"></a>      &lt;artifactid&gt;plexus-compiler-eclipse&lt;/artifactid&gt;
-<a name="line-%s"></a>      &lt;version&gt;xxxx&lt;/version&gt;
-<a name="line-%s"></a>    &lt;/dependency&gt;
-<a name="line-%s"></a>  &lt;/dependencies&gt;
-<a name="line-%s"></a>&lt;/plugin&gt;
-</pre></div><p>Also note that to launch Maven from within Eclipse, JRE used for launch also need to come from JDK. By default Eclipse registers JRE it is started in, but this can be configured on "Window / Preferences / Java / Installed JREs" preference page.</p><h2>Compilation errors on restricted classes</h2><p>Projects using classes from <code>rt.jar</code>, such as <code>com.sun.*</code> (and some others) can have compilation errors like: "Access restriction: The type RE is not accessible due to restriction on required library <jrepath>/lib/rt.jar". Such errors indicate use of non-API classes and those access rules are defined by Eclipse JDT.</p><p>You can change compiler settings to not fail on those restrictions in workspace settings in Window / Preferences / Java / Compiler / Errors/Warnings / Deprecated and restricted API / Forbidden reference (access rules) / Warnings; or per-project from Project / Properties / Java Compiler / Errors/Warnings / Deprecated and restricted API / Forbidden reference (access rules) / Warnings</p><h2>How to Configure Proxy and Location of Maven local Repository</h2><p>M2Eclipse is using Maven <code>settings.xml</code> for proxy, local repository location and any other environment-specific configuration. This way we can use same settings between the command line and the IDE.</p><p>Default location of the <code>settings.xml</code> is at <code>~/.m2/settings.xml</code>, but you can also specify location of the global settings, i.e. one in <code>&lt;maven home&gt;/conf/settings.xml</code></p><h2>Why do Resource Folders in Java Project Have <code>excluded=&quot;*&quot;</code></h2><p>Many users are confused that when Java project is configured in Eclipse, resource folders gets <code>excluded=&quot;*&quot;</code>. This is done intentionally, because those resources are processed by the "Maven Builder" registered to the project. This builder provides special resource handling, that includes filtering, as well as execution of other Maven plugins for processing resources. See Maven build lifecycle for more details.</p><p>If you manually remove resource exclusion, JDT will copy resources and overwrite filtered resources generated by Maven plugins.</p><p>Actually project resource folder doesnât really need to be added to the buildpath (Maven Builder is going to work without it), but it been considered convenient and look better in the Package Explorer and other Eclipse views.</p><p>Also note, that classpath used for JUnit and Java Application launch configurations for projects that have Maven support enabled is also calculated in a special way and excluded resources does not affect it either.</p><h2>Why Generated Source Folders are not Added to the Classpath</h2><p>Maven plugins used to generate source code from resources or other sources can register additional source folders to Maven project during the build. Usually such plugins are bound to <code>process-resources</code> (or <code>process-test-resources</code>) build phase (for example jaxb, modello or xdoclet plugins). This means that to get those source folders for generated sources, we have to run corresponding Maven build phase.</p><p>Not all projects using generated sources, so for performance reasons, M2Eclipse does not run any Maven goals by default on project import. This can be changed in the Maven settings in "Window / Preferences / Maven / Goals to run on project import" (e.g. you can specify "process-resources" build phase or specific plugins in that field).</p><p>Alternatively you can run "Maven / Update project configuration" action from the project popup menu, which is configured to run "process-resources" by default and it can be also changed on the same preference page.</p><h2>Why projects are renamed on import</h2><p>When projects are imported directly into Eclipse workspace folder, the project name should match folder name. It is not an issue if you specify an alternative location for those projects.</p><p>Also, by default, Maven project import/checkout is using project name template like [artifactId]. You can specify alternative name template in Advanced section of the project import wizards (e.g. you can use [artifactId]-[version] template). Note that you need to make sure that artifact versions are different between those projects, or else dependency resolver will get really confused.</p><h2>Why does M2Eclipse checkout Maven projects as "maven.NNNNNNNN"?</h2><p>The Maven project checkout is based on generic Maven SCM API (which supports number of SCM providers out of the box) and we don't have any information about Maven projects before the actual checkout (e.g. we don't know if folder or project names are going to be conflicting). There are two scenarios:</p>
+  <h1>FAQ (we know this needs to be updated)</h1><h2><a href="#unable-to-locate-the-javac-compiler-error" name="unable-to-locate-the-javac-compiler-error">Unable to Locate the Javac Compiler Error</a></h2><p>Some users reported the following error that happens when importing Maven projects or when invoking &ldquo;Update Sources&rdquo; action.</p>
+<pre class="prettyprint linenums">
+6/25/07 1:15:44 PM CDT: ERROR mojo-execute : compiler:compile : Compilation failure
+Unable to locate the Javac Compiler in:
+C:Program FilesJavaj2re1.4.2_14..libtools.jar
+Please ensure you are using JDK 1.4 or above and
+not a JRE (the com.sun.tools.javac.Main class is required).
+In most cases you can change the location of your Java
+installation by setting the JAVA_HOME environment variable.
+</pre><p>That happens because those actions runs in the same JVM where Eclipse is running. If that JVM comes from JRE that isnât part of JDK, there is no Java compiler (the tools.jar) around. To workaround this you can add <code>-vm</code> argument to Eclipse command line or eclipse.ini. For Eclipse 3.3 it would look something like this:</p>
+<pre class="prettyprint linenums">
+-showsplash
+org.eclipse.platform
+--launcher.XXMaxPermSize
+256m
+-vm
+C:\jdk1.6.0\bin\javaw.exe
+-vmargs
+-Xms40m
+-Xmx256m
+</pre><p>Alternatively you could specify compilerId in the pom.xml, so Maven won&rsquo;t be looking for the JDK when compiling Java code:</p>
+<pre class="prettyprint linenums">
+&lt;plugin&gt;
+  &lt;artifactid&gt;maven-compiler-plugin&lt;/artifactid&gt;
+  &lt;configuration&gt;
+    &lt;compilerid&gt;eclipse&lt;/compilerid&gt;
+  &lt;/configuration&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupid&gt;org.codehaus.plexus&lt;/groupid&gt;
+      &lt;artifactid&gt;plexus-compiler-eclipse&lt;/artifactid&gt;
+      &lt;version&gt;xxxx&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/plugin&gt;
+</pre><p>Also note that to launch Maven from within Eclipse, JRE used for launch also need to come from JDK. By default Eclipse registers JRE it is started in, but this can be configured on &ldquo;Window / Preferences / Java / Installed JREs&rdquo; preference page.</p><h2><a href="#compilation-errors-on-restricted-classes" name="compilation-errors-on-restricted-classes">Compilation errors on restricted classes</a></h2><p>Projects using classes from <code>rt.jar</code>, such as <code>com.sun.*</code> (and some others) can have compilation errors like: &ldquo;Access restriction: The type RE is not accessible due to restriction on required library <jrepath>/lib/rt.jar&rdquo;. Such errors indicate use of non-API classes and those access rules are defined by Eclipse JDT.</p><p>You can change compiler settings to not fail on those restrictions in workspace settings in Window / Preferences / Java / Compiler / Errors/Warnings / Deprecated and restricted API / Forbidden reference (access rules) / Warnings; or per-project from Project / Properties / Java Compiler / Errors/Warnings / Deprecated and restricted API / Forbidden reference (access rules) / Warnings</p><h2><a href="#how-to-configure-proxy-and-location-of-maven-local-repository" name="how-to-configure-proxy-and-location-of-maven-local-repository">How to Configure Proxy and Location of Maven local Repository</a></h2><p>M2Eclipse is using Maven <code>settings.xml</code> for proxy, local repository location and any other environment-specific configuration. This way we can use same settings between the command line and the IDE.</p><p>Default location of the <code>settings.xml</code> is at <code>~/.m2/settings.xml</code>, but you can also specify location of the global settings, i.e. one in <code>&lt;maven home&gt;/conf/settings.xml</code></p><h2>Why do Resource Folders in Java Project Have <code>excluded=&quot;*&quot;</code></h2><p>Many users are confused that when Java project is configured in Eclipse, resource folders gets <code>excluded=&quot;*&quot;</code>. This is done intentionally, because those resources are processed by the &ldquo;Maven Builder&rdquo; registered to the project. This builder provides special resource handling, that includes filtering, as well as execution of other Maven plugins for processing resources. See Maven build lifecycle for more details.</p><p>If you manually remove resource exclusion, JDT will copy resources and overwrite filtered resources generated by Maven plugins.</p><p>Actually project resource folder doesnât really need to be added to the buildpath (Maven Builder is going to work without it), but it been considered convenient and look better in the Package Explorer and other Eclipse views.</p><p>Also note, that classpath used for JUnit and Java Application launch configurations for projects that have Maven support enabled is also calculated in a special way and excluded resources does not affect it either.</p><h2><a href="#why-generated-source-folders-are-not-added-to-the-classpath" name="why-generated-source-folders-are-not-added-to-the-classpath">Why Generated Source Folders are not Added to the Classpath</a></h2><p>Maven plugins used to generate source code from resources or other sources can register additional source folders to Maven project during the build. Usually such plugins are bound to <code>process-resources</code> (or <code>process-test-resources</code>) build phase (for example jaxb, modello or xdoclet plugins). This means that to get those source folders for generated sources, we have to run corresponding Maven build phase.</p><p>Not all projects using generated sources, so for performance reasons, M2Eclipse does not run any Maven goals by default on project import. This can be changed in the Maven settings in &ldquo;Window / Preferences / Maven / Goals to run on project import&rdquo; (e.g. you can specify &ldquo;process-resources&rdquo; build phase or specific plugins in that field).</p><p>Alternatively you can run &ldquo;Maven / Update project configuration&rdquo; action from the project popup menu, which is configured to run &ldquo;process-resources&rdquo; by default and it can be also changed on the same preference page.</p><h2><a href="#why-projects-are-renamed-on-import" name="why-projects-are-renamed-on-import">Why projects are renamed on import</a></h2><p>When projects are imported directly into Eclipse workspace folder, the project name should match folder name. It is not an issue if you specify an alternative location for those projects.</p><p>Also, by default, Maven project import/checkout is using project name template like [artifactId]. You can specify alternative name template in Advanced section of the project import wizards (e.g. you can use [artifactId]-[version] template). Note that you need to make sure that artifact versions are different between those projects, or else dependency resolver will get really confused.</p><h2>Why does M2Eclipse checkout Maven projects as &ldquo;maven.NNNNNNNN&rdquo;?</h2><p>The Maven project checkout is based on generic Maven SCM API (which supports number of SCM providers out of the box) and we don&rsquo;t have any information about Maven projects before the actual checkout (e.g. we don&rsquo;t know if folder or project names are going to be conflicting). There are two scenarios:</p>
 <ol>
   <li>the root checked out folder has pom.xml</li>
   <li>the checked out folder has number of projects without pom.xml at the root</li>
-</ol><p>The second scenario could happen when there is several projects located at selected SCM URL or when user selected multiple SCM URLs, e.g. using one of the available SCM UI integrations (CVS, Subclipse, etc).</p><p>In the first case the checkout folder will be renamed to match the result Eclipse project name for the Maven pom.xml and in the first case folder stays with "maven.NNNNNNNN" name. It is not clear if it is always possible to move checkout folder around for all SCMs (e.g. because of the SCM metadata).</p><p>Also see <a href="#Why_projects_are_renamed_on_import" title="wikilink">Why projects are renamed on import</a></p><h2>How to Connect to HTTPS Repositories</h2><p>The Maven howto describes how to configure Maven to work with https repositories. To make the same properties work in Eclipse they need to be specified in two additional places:</p>
+</ol><p>The second scenario could happen when there is several projects located at selected SCM URL or when user selected multiple SCM URLs, e.g. using one of the available SCM UI integrations (CVS, Subclipse, etc).</p><p>In the first case the checkout folder will be renamed to match the result Eclipse project name for the Maven pom.xml and in the first case folder stays with &ldquo;maven.NNNNNNNN&rdquo; name. It is not clear if it is always possible to move checkout folder around for all SCMs (e.g. because of the SCM metadata).</p><p>Also see <a href="#Why_projects_are_renamed_on_import" title="wikilink">Why projects are renamed on import</a></p><h2><a href="#how-to-connect-to-https-repositories" name="how-to-connect-to-https-repositories">How to Connect to HTTPS Repositories</a></h2><p>The Maven howto describes how to configure Maven to work with https repositories. To make the same properties work in Eclipse they need to be specified in two additional places:</p>
 <ol>
-  <li><p>to make in-process Maven use them (e.g. on project import or "Maven / Update project configuration" actions) add them to -vmargs section in eclipse.ini or to Eclipse command line</p></li>
-  <li><p>to make Maven launch configuration use them use "Window / Preferences / Java / Installed JREs / Edit / Default VM arguments"</p></li>
-</ol><p>To make both Maven cli and Eclipse use the preferences they would need to come from the Mavenâs settings.xml, but that would require changes in the Maven itself.</p><h2>Miscellaneous</h2><h2>How Search Works</h2><p>Dependency search is using local index for Maven repositories:</p>
+  <li><p>to make in-process Maven use them (e.g. on project import or &ldquo;Maven / Update project configuration&rdquo; actions) add them to -vmargs section in eclipse.ini or to Eclipse command line</p></li>
+  <li><p>to make Maven launch configuration use them use &ldquo;Window / Preferences / Java / Installed JREs / Edit / Default VM arguments&rdquo;</p></li>
+</ol><p>To make both Maven cli and Eclipse use the preferences they would need to come from the Mavenâs settings.xml, but that would require changes in the Maven itself.</p><h2><a href="#miscellaneous" name="miscellaneous">Miscellaneous</a></h2><h2><a href="#how-search-works" name="how-search-works">How Search Works</a></h2><p>Dependency search is using local index for Maven repositories:</p>
 <ul>
   <li>indexes for remote Maven repositories, such as Central repository, can be downloaded from remote repositories if they publish index created using Nexus Indexer tool or if repository is managed by Nexus repository manager</li>
   <li>indexes for remote Maven repositories can be also packaged as Eclipse plugin and installed using Eclipse Update manager.</li>
   <li>index for a Local Maven repository is updated incrementally when plugin downloads jars from any remote repositories. Local repository can be also reindexed from Window / Preferencesâ¦ / Maven preferences page.</li>
   <li>index for an Eclipse workspace is updated when projects are added, removed or changed in Eclipse workspace.</li>
-</ul><h2>M2Eclipse vs. maven-eclipse-plugin</h2><p>M2Eclipse is an Eclipse plugin that allows execution of Maven goals and manages Maven dependencies. It is a different beast to the maven-eclipse-plugin which is a Maven plugin that attempts to manage/modify Eclipse project files to account for Maven dependencies. Generally, if you are using m2eclipse you don't really need maven-eclipse-plugin. The former is providing advanced project import and configuration features and provides integration with other Eclipse tools.</p><h2>What Version of Maven is used by M2Eclipse?</h2><p>Plugin is not actually using Maven itself. It is using component that is part of Maven called Maven Embedder. This component is not available for Maven 2.0.x. The Embedder is used by the Maven command line interface (CLI) starting from version 2.1 that includes number of improvements to allow it to actually embed Maven.</p><p>The m2eclipse is currently using the Embedder component from Maven 3.0. If you want to execute particular version of Maven installed elsewhere, you can do so from the Maven launch configuration or select it as default in Maven / Installations preference page.</p><h2>Why does my Maven build work on the CLI but not in M2Eclipse?</h2><p>Because M2Eclipse is using the embedded Maven runtime in Maven 3.0, you can see differences in the execution between m2eclipse and command line when Maven 2.1.x is used. We hope that such regressions and incompatibilities will be fixed in the future releases of Maven 3.0. Note that m2eclipse is always using embedded Maven runtime when running Maven builder, importing projects and updating project configuration, however you can configure m2eclipse to use external Maven installation when launching Maven using "Run as¦ / Maven XXX" actions.</p><h2>How to generate a thread dump</h2>
+</ul><h2>M2Eclipse vs. maven-eclipse-plugin</h2><p>M2Eclipse is an Eclipse plugin that allows execution of Maven goals and manages Maven dependencies. It is a different beast to the maven-eclipse-plugin which is a Maven plugin that attempts to manage/modify Eclipse project files to account for Maven dependencies. Generally, if you are using m2eclipse you don&rsquo;t really need maven-eclipse-plugin. The former is providing advanced project import and configuration features and provides integration with other Eclipse tools.</p><h2><a href="#what-version-of-maven-is-used-by-m2eclipse-" name="what-version-of-maven-is-used-by-m2eclipse-">What Version of Maven is used by M2Eclipse?</a></h2><p>Plugin is not actually using Maven itself. It is using component that is part of Maven called Maven Embedder. This component is not available for Maven 2.0.x. The Embedder is used by the Maven command line interface (CLI) starting from version 2.1 that includes number of improvements to allow it to actually embed Maven.</p><p>The m2eclipse is currently using the Embedder component from Maven 3.0. If you want to execute particular version of Maven installed elsewhere, you can do so from the Maven launch configuration or select it as default in Maven / Installations preference page.</p><h2><a href="#why-does-my-maven-build-work-on-the-cli-but-not-in-m2eclipse-" name="why-does-my-maven-build-work-on-the-cli-but-not-in-m2eclipse-">Why does my Maven build work on the CLI but not in M2Eclipse?</a></h2><p>Because M2Eclipse is using the embedded Maven runtime in Maven 3.0, you can see differences in the execution between m2eclipse and command line when Maven 2.1.x is used. We hope that such regressions and incompatibilities will be fixed in the future releases of Maven 3.0. Note that m2eclipse is always using embedded Maven runtime when running Maven builder, importing projects and updating project configuration, however you can configure m2eclipse to use external Maven installation when launching Maven using &ldquo;Run as¦ / Maven XXX&rdquo; actions.</p><h2><a href="#how-to-generate-a-thread-dump" name="how-to-generate-a-thread-dump">How to generate a thread dump</a></h2>
 <ul>
   <li>On Windows press Ctrl-Break in the Java console started with Eclipse IDE. To start Eclipse with Java console use java.exe instead of javaw.exe in eclipse.ini.</li>
 </ul>
 <!-- -->
-<div class="highlight"><pre><a name="line-%s"></a>-vm
-<a name="line-%s"></a>C:\jdk1.6.0_03\bin\java.exe
-</pre></div>
+<pre class="prettyprint linenums">
+-vm
+C:\jdk1.6.0_03\bin\java.exe
+</pre>
 <ul>
   <li>On Unix, Linux, Mac OS X press <code>Ctrl-\</code> in the terminal console used to start Eclipse IDE</li>
   <li>Alternatively on Unix, Linux, Mac OS X send the QUIT signal to the Java VM running Eclipse: kill -QUIT processid, where processid is the process number of the respective java process</li>
@@ -175,10 +172,10 @@
   <ul>
     <li>launch from <a href="http://www.adaptj.com/root/webstart/stacktrace/app/launch.jnlp">http://www.adaptj.com/root/webstart/stacktrace/app/launch.jnlp</a></li>
     <li>details <a href="http://www.adaptj.com/root/main/stacktrace">http://www.adaptj.com/root/main/stacktrace</a></li>
-    <li>to generate thread dump invoke "Process / Selectâ¦" from the main main menu and select Java process from the drop down list, then invoke "Process / Thread Dump"</li>
+    <li>to generate thread dump invoke &ldquo;Process / Selectâ¦&rdquo; from the main main menu and select Java process from the drop down list, then invoke &ldquo;Process / Thread Dump&rdquo;</li>
   </ul></li>
   <li>Other tools listed on Javapedia ThreadDump page</li>
-</ul><h2>How to retrieve an actual command line used to start JVM and Maven</h2><p>An actual command line used to start JVM processes in Eclipse, including Maven builds, can be retrieved from the Debug view (e.g. from the Debug perspective):</p><p>debugview.png</p><p>There you can select corresponding Java process and open its properties (from the popup menu or using Alt-Enter shortcut):</p><p>processproperties.png</p>
+</ul><h2><a href="#how-to-retrieve-an-actual-command-line-used-to-start-jvm-and-maven" name="how-to-retrieve-an-actual-command-line-used-to-start-jvm-and-maven">How to retrieve an actual command line used to start JVM and Maven</a></h2><p>An actual command line used to start JVM processes in Eclipse, including Maven builds, can be retrieved from the Debug view (e.g. from the Debug perspective):</p><p>debugview.png</p><p>There you can select corresponding Java process and open its properties (from the popup menu or using Alt-Enter shortcut):</p><p>processproperties.png</p>
   </div>
 </div>
       </div><!-- END container -->
@@ -222,19 +219,12 @@
     <script type="text/javascript" src="/m2e/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/m2e/assets/plugins/hover-dropdown.min.js"></script>
     <script type="text/javascript" src="/m2e/assets/plugins/back-to-top.js"></script>
-    <!-- JS Implementing Plugins -->
-    <script type="text/javascript" src="/m2e/assets/plugins/flexslider/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" src="/m2e/assets/plugins/parallax-slider/js/modernizr.js"></script>
-    <script type="text/javascript" src="/m2e/assets/plugins/parallax-slider/js/jquery.cslider.js"></script> 
-    <!-- JS Page Level -->
-    <script type="text/javascript" src="/m2e/assets/js/app.js"></script>
-    <script type="text/javascript" src="/m2e/assets/js/index.js"></script>
+    <!-- TESTING JS -->
+    <script type="text/javascript" src="/m2e/assets/plugins/app.js"></script>
     <script type="text/javascript">
-      jQuery(document).ready(function() {
-      App.init();
-      App.initSliders();
-      Index.initParallaxSlider();
-      });
+        jQuery(document).ready(function() {
+            App.init();
+        });
     </script>
     <!--[if lt IE 9]>
         <script src="/m2e/assets/plugins/respond.js"></script>
