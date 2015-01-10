@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!-->
+<html lang="en"> <!--<![endif]-->
+  <head>
+    <title>M2Eclipse | </title>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="M2Eclipse provides tight integration for Apache Maven into the Eclipse IDE." />
+    <meta name="author" content="eclipse.org" />
+    <meta property="twitter:account_id" content="15710507" />      
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="/m2e/assets/plugins/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/m2e/assets/css/style.css" />
+    <link rel="stylesheet" href="/m2e/assets/css/m2eclipse.css" />
+    <link rel="shortcut icon" href="/m2e/assets/img/favicon.ico" />        
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="/m2e/assets/plugins/font-awesome/css/font-awesome.css" />    
+    <!-- GA -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-56202333-1', 'eclipse.org');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      
+            <div class="header">
+        <div class="navbar navbar-default" role="navigation">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/m2e/index.html"> 
+                <img id="logo-header" src="/m2e/assets/img/m2e_logo@2x.svg" alt="M2Eclipse" width="150" height="61" style="margin:20px 0px 10px;"/>
+              </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-responsive-collapse">
+              <ul class="nav navbar-nav navbar-left">
+              
+                  
+                  
+                  <li class="">
+                      <a href="/m2e/m2e-news.html">News</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e/m2e-downloads.html">Download</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e/documentation/m2e-documentation.html">Documentation</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e/m2e-community.html">Community</a>
+                  </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div><!-- END header -->
+      
+      <div class="container" style="margin-top:20px;">
+        <h1><a href="#m2eclipse-website" name="m2eclipse-website">M2Eclipse Website</a></h1><p>The M2Eclipse website is a Jekyll-based website. This means the sources are a standard looking Jekyll-based site, and the website we publish for the outside world is what Jekyll generates. Currently at Eclipse websites are checked into a Git repository in their final form and that&rsquo;s what is served as our public website. There is no mechanism, currently, to run a transformation process so the M2Eclipse website is in one Git repository and then we push the final version to another Git repository. This is not idea but that&rsquo;s what we have. </p><p>To try and make it as simple as possible the Git repository with the sources contains a submodule that contains the final site. To get the sources and the module containing the <code>_site</code> directory do the following:</p>
+<pre class="prettyprint linenums">
+git clone --recursive git@github.com:takari/m2eclipse-website.git
+</pre><p>Now you should have something that looks like the following:</p>
+<pre class="prettyprint linenums">
+bash-3.2$ tree -L 1
+.
+├── Icon.
+├── README.md
+├── _config.yml
+├── _includes
+├── _layouts
+├── _plugins
+├── _references.md
+├── _site
+├── assets
+├── documentation
+├── index.html
+├── jekyll.jar
+├── jekyll.sh
+├── m2e-community.md
+├── m2e-downloads.md
+├── m2e-news.md
+└── projectplan
+</pre><p>The easiest way to edit the site is to execute the script provided. Start it up and you will see something like the following:</p>
+<pre class="prettyprint linenums">
+bash-3.2$ ./jekyll.sh
+
+     Source directory: /Users/jvanzyl/Dropbox/takari-website-m2e
+Destination directory: /Users/jvanzyl/Dropbox/takari-website-m2e/_site
+
+website.md
+m2e-development-environment.md
+m2e-documentation.md
+m2e-execution-not-covered.md
+m2e-extension-development.md
+m2e-faq.md
+release-notes-15.md
+index.html
+m2e-community.md
+m2e-downloads.md
+m2e-news.md
+116 [main] INFO org.eclipse.jetty.server.Server - jetty-9.0.z-SNAPSHOT
+138 [main] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@1332fa84{/,null,AVAILABLE}
+138 [main] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.h.ContextHandler@77dcf9f4{/m2e,file:/Users/jvanzyl/Dropbox/takari-website-m2e/_site/,AVAILABLE}
+151 [main] INFO org.eclipse.jetty.server.ServerConnector - Started ServerConnector@69317d48{HTTP/1.1}{0.0.0.0:4000}
+</pre><p>Now you can add and edit content for the website, reload your browser, edit, rinse, repeat. The content will be generated in the <code>_site</code> directory as you make changes. Once you are finish working on content, you can go into the <code>_site</code> directory, add, commit, and then push changes to the production website. They should appear on <a href="http://eclipse.org/m2e">http://eclipse.org/m2e</a> fairly soon after.</p><p>NOTE: Ideally we will eventually have a process on the Eclipse host that will the transformation for us, or possibly ask the Webmaster to pull the final site from a directory within the Git repository. In a standard Jekyll-based build the default location of the generated site is <code>_site</code>. If we can ask to have our public facing website pulled from the <code>_site</code> directory in out website&rsquo;s Git repository we can probably put it all in a single repository.</p>
+      </div><!-- END container -->
+    </div><!-- END wrap -->
+    
+        <div class="stickyFooter">
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 md-margin-bottom-40"></div><!--/col-md-4-->
+            <div class="col-md-4 md-margin-bottom-40">            </div>
+            <div class="col-md-4">              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="copyright-space">
+                <a href="https://www.eclipse.org/">Home</a> | <a href="https://www.eclipse.org/legal/privacy.php">Privacy Policy</a> | <a href="https://www.eclipse.org/legal/termsofuse.php">Terms of Use</a> | <a href="https://www.eclipse.org/legal/copyright.php">Copyright Agent</a> | <a href="https://www.eclipse.org/legal/">Legal</a> | <a href="https://www.eclipse.org/org/foundation/contact.php">Contact Us</a>
+              </p>
+            </div>
+            <div class="col-md-6" align="right">
+              <p class="copyright-space">
+                Copyright &copy;
+                2014 The Eclipse Foundation. All Rights Reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- JS Global Compulsory -->
+    <script type="text/javascript" src="/m2e/assets/plugins/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/m2e/assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/m2e/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/m2e/assets/plugins/hover-dropdown.min.js"></script>
+    <script type="text/javascript" src="/m2e/assets/plugins/back-to-top.js"></script>
+    <!-- TESTING JS -->
+    <script type="text/javascript" src="/m2e/assets/plugins/app.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <!--[if lt IE 9]>
+        <script src="/m2e/assets/plugins/respond.js"></script>
+    <![endif]-->
+  </body>
+</html>	
