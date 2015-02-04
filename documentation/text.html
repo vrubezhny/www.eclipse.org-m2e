@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<h3 id="overview">Overview</h3>
+<p>Starting with m2e 1.1, maven plugin developers can embed m2e lifecycle mapping metadata as META-INF/m2e/lifecycle-mapping-metadata.xml file included with main plugin artifact.</p>
+<p>This file uses the same format as lifecycle-mapping-metadata.xml used by m2e project configurators and embedded in pom.xml file with some minor extensions to the format -- <pluginExecutionFilter/> elements are not required to provide plugin groupId, artifactId and versionRange because this information can be automatically derived from maven plugin already. Although groupId, artifactId and versionRange information is not required, it is still allowed by the format and maven plugin developers can still provide it if they choose so.</p>
+<h3 id="mapping"><ignore/> mapping</h3>
+<p><code>&lt;lifecycleMappingMetadata&gt;</code><br /><code>  &lt;pluginExecutions&gt;</code><br /><code>    &lt;pluginExecution&gt;</code><br /><code>      &lt;pluginExecutionFilter&gt;</code><br /><code>        &lt;goals&gt;</code><br /><code>          &lt;goal&gt;some-goal&lt;/goal&gt;</code><br /><code>        &lt;/goals&gt;</code><br /><code>      &lt;/pluginExecutionFilter&gt;</code><br /><code>      &lt;action&gt;</code><br /><code>        </code><strong><code>&lt;ignore</code> <code>/&gt;</code></strong><br /><code>      &lt;/action&gt;</code><br /><code>    &lt;/pluginExecution&gt;</code><br /><code>  &lt;/pluginExecutions&gt;</code><br /><code>&lt;/lifecycleMappingMetadata&gt;</code></p>
+<h3 id="mapping-1"><execute/> mapping</h3>
+<p><code>&lt;lifecycleMappingMetadata&gt;</code><br /><code>  &lt;pluginExecutions&gt;</code><br /><code>    &lt;pluginExecution&gt;</code><br /><code>      &lt;pluginExecutionFilter&gt;</code><br /><code>        &lt;goals&gt;</code><br /><code>          &lt;goal&gt;some-goal&lt;/goal&gt;</code><br /><code>        &lt;/goals&gt;</code><br /><code>      &lt;/pluginExecutionFilter&gt;</code><br /><code>      &lt;action&gt;</code><br /><code>        </code><strong><code>&lt;execute&gt;</code></strong><br /><code>          </code><strong><code>&lt;runOnIncremental&gt;see</code> <code>below&lt;/runOnIncremental&gt;</code></strong><br /><code>          </code><strong><code>&lt;runOnConfiguration&gt;see</code> <code>below&lt;/runOnConfiguration&gt;</code></strong><br /><code>        </code><strong><code>&lt;/execute&gt;</code></strong><br /><code>      &lt;/action&gt;</code><br /><code>    &lt;/pluginExecution&gt;</code><br /><code>  &lt;/pluginExecutions&gt;</code><br /><code>&lt;/lifecycleMappingMetadata&gt;</code></p>
+<p>If <runOnIncremental/> is set to <em>true</em>, corresponding mojo will be executed during both full and incremental workspace builds. If set to <em>false</em> (the default), the mojo will be executed during full workspace build only.</p>
+<p>If <runOnConfiguration/> set to <em>true</em>, corresponding maven mojos will be executed as part of project import and configuration update. This is necessary for mojos that make changes to MavenProject instance and expect these changes to be available to other maven plugins. It will also trigger m2e to update the Eclipse project accordingly. For example, most code generation plugins, like modello or antlr3, add new source directories to MavenProject instance and need to have <runOnConfiguration/> set to <em>true</em>. m2e will then update the Eclipse project to use these directories as source folders.</p>
+<h3 id="buildcontext">BuildContext</h3>
+<p>Regardless of build type, all mojos mapped to <execute/> <strong>MUST</strong> use plexus-build-api <a href="https://github.com/sonatype/sisu-build-api/blob/master/src/main/java/org/sonatype/plexus/build/incremental/BuildContext.java">BuildContext</a> to change workspace resources and to associate warning/error/info messages with workspace resources. Additionally, mojos mapped to <execute/> during incremental build or on configuration <strong>MUST</strong> use <a href="https://github.com/sonatype/sisu-build-api/blob/master/src/main/java/org/sonatype/plexus/build/incremental/BuildContext.java">BuildContext</a> to skip execution when there none of relevant workspace resources changed.</p>
+<p><strong>BuildContext provides reasonable default behaviour for command line build</strong>. It has virtually no impact on build performance, i.e. all build context methods are just pass-though straight to filesystem and thus BuildContext can be used outside of m2e without any impact on the build result.</p>
+<p>Use of BuildContext is required for two reasons</p>
+<p>All filesystem changes must be registered as such with build context. This allows m2e to synchronize these changes with their corresponding workspace resources, which will trigger required workspace processing of the changes. For example, if the mojo generates java source code, the new code will not be compiled or won't even be visible in workspace unless workspace is refreshed. Out-of-sync files under target/classes or target/test-classes can also cause unexpected JDT &quot;clean&quot; builds, which result in all non-java files removed.</p>
+<p>Mojos that runOnIncremental=true (the default), will be executed for any resource file, including all sources and generated files under target/. For performance and stability reasons it is absolutely essential to short-cut any time consuming work and all filesystem changes if there are no changes to the input sources processed by the mojo. For java code generating mojos, failure to act on relevant input changes only will almost certainly result in endless build -- mojo generates .java files, which triggers jdt to generate .class files, which triggers the mojo to generate .java files, and so on.</p>
+<p>Although the current plexus-build-api will still be supported, it will likely be replaced with a new version more tightly integrated with Maven CLI build and other Maven-based tools in the near future.</p>
+<h3 id="buildcontext-code-snippets">BuildContext code snippets</h3>
+<p>Add plexus-build-api to pom.xml</p>
+<p><code>   </code><dependency><br /><code>     </code><groupId><code>org.sonatype.plexus</code></groupId><br /><code>     </code><artifactId><code>plexus-build-api</code></artifactId><br /><code>     </code><version><code>0.0.7</code></version><br /><code>   </code></dependency></p>
+<p>Instruct Maven to inject BuildContext instance in the mojo</p>
+<p><code>  /** @component */</code><br /><code>  private BuildContext buildContext;</code></p>
+<p>To check if single input file was modified since previous build</p>
+<p><code>  File source = ...;</code><br /><code>  if ( buildContext.hasDelta( source ) )</code><br /><code>  {</code><br /><code>     ... process the source;</code><br /><code>  }</code></p>
+<p>To check if any of the paths in given collection was modified since previous build (paths are relative to ${project.basedir})</p>
+<p><code>  List</code><String><code> relpaths = ...;</code><br /><code>  if ( buildContext.hasDelta( relpaths ) )</code><br /><code>  {</code><br /><code>     ... process the sources;</code><br /><code>  }</code></p>
+<p>Scanning for modified resources</p>
+<p><code> File modelDir = ...;</code><br /><code> Scanner scanner = buildContext.newScanner( modelDir );</code><br /><code> // code below is standard plexus Scanner stuff</code><br /><code> scanner.setIncludes( new String[] {&quot;*.mdo&quot;} );</code><br /><code> scanner.scan()</code><br /><code> String[] includedFiles = scanner.getIncludedFiles();</code><br /><code> if ( includedFiles != null )</code><br /><code> {</code><br /><code>     for ( String includedFile : includedFiles )</code><br /><code>     {</code><br /><code>         File modelFile = new File( scanner.getBasedir(), includedFile );</code><br /><code>         ... process the file </code><br /><code>     }</code><br /><code> }</code></p>
+<p>Open new output stream, which is automatically synchronized with Eclipse workspace</p>
+<p><code> File file = ...;</code><br /><code> OutputStream os = buildContext.newFileOutputStream( file );</code><br /><code> try</code><br /><code> {</code><br /><code>     ... write to the stream;</code><br /><code> }</code><br /><code> finally</code><br /><code> {</code><br /><code>     IOUtils.close( os );</code><br /><code> }</code></p>
+<p>Notify build context about a file created, updated or deleted without use of newFileOutputStream. This works for directories, too.</p>
+<p><code> File file = ...;</code><br /><code> buildContext.refresh( file );</code></p>
+<p>Dealing with error messages</p>
+<p><code> File source = ...;</code><br /><code> buildContext.removeMessages( source );</code><br /><code> ... process the source ...;</code><br /><code> if ( error in the source file )</code><br /><code> {</code><br /><code>     buildContext.addMessage( source, line, column, message, BuildContext.SEVERITY_ERROR, null);</code><br /><code> }</code></p>
+<p><a href="Category:M2E" title="wikilink">Category:M2E</a></p>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!-->
+<html lang="en"> <!--<![endif]-->
+  <head>
+    <title>M2Eclipse | Making Maven Plugins M2Eclilpse Compatible</title>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="M2Eclipse provides tight integration for Apache Maven into the Eclipse IDE." />
+    <meta name="author" content="eclipse.org" />
+    <meta property="twitter:account_id" content="15710507" />      
+    <!-- CSS Global Compulsory-->
+    <link rel="stylesheet" href="/m2e/assets/plugins/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/m2e/assets/css/style.css" />
+    <link rel="stylesheet" href="/m2e/assets/css/m2eclipse.css" />
+    <link rel="shortcut icon" href="/m2e/assets/img/favicon.ico" />        
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="/m2e/assets/plugins/font-awesome/css/font-awesome.css" />    
+    <!-- GA -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-56202333-1', 'eclipse.org');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      
+            <div class="header">
+        <div class="navbar navbar-default" role="navigation">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/m2e/index.html"> 
+                <img id="logo-header" src="/m2e/assets/img/m2e_logo@2x.svg" alt="M2Eclipse" width="150" height="61" style="margin:20px 0px 10px;"/>
+              </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-responsive-collapse">
+              <ul class="nav navbar-nav navbar-left">
+              
+                  
+                  
+                  <li class="">
+                      <a href="/m2e/m2e-news.html">News</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e/m2e-downloads.html">Download</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e/documentation/m2e-documentation.html">Documentation</a>
+                  </li>
+                
+                  
+                  
+                  <li class="">
+                      <a href="/m2e/m2e-community.html">Community</a>
+                  </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div><!-- END header -->
+      
+      <div class="margin-bottom-20"></div>
+      <div class="container">
+        <div class="row">
+  <div class="col-md-3">
+    <div class="margin-bottom-30"></div>
+    <h4 class="headline">Users</h2>
+    <ul class="unstyled">
+      <li><a href="/m2e/documentation/m2e-faq.html">FAQ</a></li>
+      <li><a href="/m2e/documentation/m2e-execution-not-covered.html">Execution Not Covered</a></li>
+    </ul>  
+    <h4 class="headline">Developers</h2>
+    <ul class="unstyled">
+      <li><a href="/m2e/documentation/m2e-development-environment.html">Developement Environment Setup</a></li>
+    </ul>  
+    <h4 class="headline">Extension Developers</h2>
+    <ul class="unstyled">
+      <li><a href="/m2e/documentation/m2e-extension-development.html">Getting Started</a></li>
+      <li><a href="/m2e/documentation/m2e-making-maven-plugins-compat.html">Making Maven Plugins Compatible</a></li>
+    </ul>      
+    <h4 class="headline">Release Notes</h2>
+    <ul class="unstyled">
+      <li><a href="/m2e/documentation/release-notes-15.html">M2Eclipse 1.5</a></li>
+    </ul>      
+  </div>  
+  <div class="col-md-9 docs">
+  <h3><a href="#overview" name="overview">Overview</a></h3><p>Starting with m2e 1.1, maven plugin developers can embed m2e lifecycle mapping metadata as META-INF/m2e/lifecycle-mapping-metadata.xml file included with main plugin artifact.</p><p>This file uses the same format as lifecycle-mapping-metadata.xml used by m2e project configurators and embedded in pom.xml file with some minor extensions to the format &ndash; elements are not required to provide plugin groupId, artifactId and versionRange because this information can be automatically derived from maven plugin already. Although groupId, artifactId and versionRange information is not required, it is still allowed by the format and maven plugin developers can still provide it if they choose so.</p><h3><a href="#mapping" name="mapping">mapping</a></h3>
+<pre class="prettyprint linenums">
+&lt;lifecycleMappingMetadata&gt;
+  &lt;pluginExecutions&gt;
+    &lt;pluginExecution&gt;
+      &lt;pluginExecutionFilter&gt;
+        &lt;goals&gt;
+          &lt;goal&gt;some-goal&lt;/goal&gt;
+        &lt;/goals&gt;
+      &lt;/pluginExecutionFilter&gt;
+      &lt;action&gt;
+        &lt;ignore/&gt;
+      &lt;/action&gt;
+    &lt;/pluginExecution&gt;
+  &lt;/pluginExecutions&gt;
+&lt;/lifecycleMappingMetadata&gt;
+</pre><h3><a href="#mapping" name="mapping">mapping</a></h3>
+<pre class="prettyprint linenums">
+&lt;lifecycleMappingMetadata&gt;
+  &lt;pluginExecutions&gt;
+    &lt;pluginExecution&gt;
+      &lt;pluginExecutionFilter&gt;
+        &lt;goals&gt;
+          &lt;goal&gt;some-goal&lt;/goal&gt;
+        &lt;/goals&gt;
+      &lt;/pluginExecutionFilter&gt;
+      &lt;action&gt;
+        &lt;execute&gt;
+          &lt;runOnIncremental&gt;see below&lt;/runOnIncremental&gt;
+          &lt;runOnConfiguration&gt;see below&lt;/runOnConfiguration&gt;
+        &lt;/execute&gt;
+      &lt;/action&gt;
+    &lt;/pluginExecution&gt;
+  &lt;/pluginExecutions&gt;
+&lt;/lifecycleMappingMetadata&gt;
+</pre><p>If is set to <em>true</em>, corresponding mojo will be executed during both full and incremental workspace builds. If set to <em>false</em> (the default), the mojo will be executed during full workspace build only.</p><p>If set to <em>true</em>, corresponding maven mojos will be executed as part of project import and configuration update. This is necessary for mojos that make changes to MavenProject instance and expect these changes to be available to other maven plugins. It will also trigger m2e to update the Eclipse project accordingly. For example, most code generation plugins, like modello or antlr3, add new source directories to MavenProject instance and need to have set to <em>true</em>. m2e will then update the Eclipse project to use these directories as source folders.</p><h3><a href="#buildcontext" name="buildcontext">BuildContext</a></h3><p>Regardless of build type, all mojos mapped to <strong>MUST</strong> use plexus-build-api <a href="https://github.com/sonatype/sisu-build-api/blob/master/src/main/java/org/sonatype/plexus/build/incremental/BuildContext.java">BuildContext</a> to change workspace resources and to associate warning/error/info messages with workspace resources. Additionally, mojos mapped to during incremental build or on configuration <strong>MUST</strong> use <a href="https://github.com/sonatype/sisu-build-api/blob/master/src/main/java/org/sonatype/plexus/build/incremental/BuildContext.java">BuildContext</a> to skip execution when there none of relevant workspace resources changed.</p><p><strong>BuildContext provides reasonable default behaviour for command line build</strong>. It has virtually no impact on build performance, i.e. all build context methods are just pass-though straight to filesystem and thus BuildContext can be used outside of m2e without any impact on the build result.</p><p>Use of BuildContext is required for two reasons</p><p>All filesystem changes must be registered as such with build context. This allows m2e to synchronize these changes with their corresponding workspace resources, which will trigger required workspace processing of the changes. For example, if the mojo generates java source code, the new code will not be compiled or won&rsquo;t even be visible in workspace unless workspace is refreshed. Out-of-sync files under target/classes or target/test-classes can also cause unexpected JDT &ldquo;clean&rdquo; builds, which result in all non-java files removed.</p><p>Mojos that runOnIncremental=true (the default), will be executed for any resource file, including all sources and generated files under target/. For performance and stability reasons it is absolutely essential to short-cut any time consuming work and all filesystem changes if there are no changes to the input sources processed by the mojo. For java code generating mojos, failure to act on relevant input changes only will almost certainly result in endless build &ndash; mojo generates .java files, which triggers jdt to generate .class files, which triggers the mojo to generate .java files, and so on.</p><p>Although the current plexus-build-api will still be supported, it will likely be replaced with a new version more tightly integrated with Maven CLI build and other Maven-based tools in the near future.</p><h3><a href="#buildcontext-code-snippets" name="buildcontext-code-snippets">BuildContext code snippets</a></h3><p>Add plexus-build-api to pom.xml</p>
+<pre class="prettyprint linenums">
+ &lt;dependency&gt;
+   &lt;groupId&gt;org.sonatype.plexus&lt;/groupId&gt;
+   &lt;artifactId&gt;plexus-build-api&lt;/artifactId&gt;
+   &lt;version&gt;0.0.7&lt;/version&gt;
+ &lt;/dependency&gt;
+</pre><p>Instruct Maven to inject BuildContext instance in the mojo</p>
+<pre class="prettyprint linenums">
+  /** @component */
+  private BuildContext buildContext;
+</pre><p>To check if single input file was modified since previous build</p>
+<pre class="prettyprint linenums">
+  File source = ...;
+  if ( buildContext.hasDelta( source ) )
+  {
+     ... process the source;
+  }
+</pre><p>To check if any of the paths in given collection was modified since previous build (paths are relative to \${project.basedir})</p>
+<pre class="prettyprint linenums">
+  List relpaths = ...;
+  if ( buildContext.hasDelta( relpaths ) )
+  {
+     ... process the sources;
+  }
+</pre><p>Scanning for modified resources</p>
+<pre class="prettyprint linenums">
+ File modelDir = ...;
+ Scanner scanner = buildContext.newScanner( modelDir );
+ // code below is standard plexus Scanner stuff
+ scanner.setIncludes( new String[] {&quot;*.mdo&quot;} );
+ scanner.scan()
+ String[] includedFiles = scanner.getIncludedFiles();
+ if ( includedFiles != null )
+ {
+     for ( String includedFile : includedFiles )
+     {
+         File modelFile = new File( scanner.getBasedir(), includedFile );
+         ... process the file 
+     }
+ }
+</pre><p>Open new output stream, which is automatically synchronized with Eclipse workspace</p>
+<pre class="prettyprint linenums">
+ File file = ...;
+ OutputStream os = buildContext.newFileOutputStream( file );
+ try
+ {
+     ... write to the stream;
+ }
+ finally
+ {
+     IOUtils.close( os );
+ }
+</pre><p>Notify build context about a file created, updated or deleted without use of newFileOutputStream. This works for directories, too.</p>
+<pre class="prettyprint linenums">
+ File file = ...;
+ buildContext.refresh( file );
+</pre><p>Dealing with error messages</p>
+<pre class="prettyprint linenums">
+ File source = ...;
+ buildContext.removeMessages( source );
+ // processs source file...
+ if ( error in the source file )
+ {
+     buildContext.addMessage( source, line, column, message, BuildContext.SEVERITY_ERROR, null);
+ }
+</pre>
+  </div>
+</div>
+      </div><!-- END container -->
+    </div><!-- END wrap -->
+    
+        <div class="stickyFooter">
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 md-margin-bottom-40"></div><!--/col-md-4-->
+            <div class="col-md-4 md-margin-bottom-40">            </div>
+            <div class="col-md-4">              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="copyright-space">
+                <a href="https://www.eclipse.org/">Home</a> | <a href="https://www.eclipse.org/legal/privacy.php">Privacy Policy</a> | <a href="https://www.eclipse.org/legal/termsofuse.php">Terms of Use</a> | <a href="https://www.eclipse.org/legal/copyright.php">Copyright Agent</a> | <a href="https://www.eclipse.org/legal/">Legal</a> | <a href="https://www.eclipse.org/org/foundation/contact.php">Contact Us</a>
+              </p>
+            </div>
+            <div class="col-md-6" align="right">
+              <p class="copyright-space">
+                Copyright &copy;
+                2015 The Eclipse Foundation. All Rights Reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- JS Global Compulsory -->
+    <script type="text/javascript" src="/m2e/assets/plugins/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/m2e/assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/m2e/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/m2e/assets/plugins/hover-dropdown.min.js"></script>
+    <script type="text/javascript" src="/m2e/assets/plugins/back-to-top.js"></script>
+    <!-- TESTING JS -->
+    <script type="text/javascript" src="/m2e/assets/plugins/app.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <!--[if lt IE 9]>
+        <script src="/m2e/assets/plugins/respond.js"></script>
+    <![endif]-->
+  </body>
+</html>	
