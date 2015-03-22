@@ -34,7 +34,8 @@
     <div class="wrap">
       
             <div class="header">
-        <div class="navbar navbar-default" role="navigation">
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="navbar-inner">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -45,7 +46,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="/m2e/index.html"> 
-                <img id="logo-header" src="/m2e/assets/img/m2e_logo@2x.svg" alt="M2Eclipse" width="150" height="61" style="margin:20px 0px 10px;"/>
+                <img id="logo-header" src="/m2e/assets/img/m2e_logo.png" alt="M2Eclipse" width="150" height="61" />
               </a>
             </div>
 
@@ -80,13 +81,17 @@
               </ul>
             </div>
           </div>
+          </div>
         </div>
       </div><!-- END header -->
       
       <div class="margin-bottom-20"></div>
-      <div class="container">
-        <div class="row">
+        <div class="container">
+          <div class="margin-bottom-100"></div>
+
+          <div class="row">
   <div class="col-md-3">
+    <div class="docNavigation affix">
     <div class="margin-bottom-30"></div>
     <h4 class="headline">Users</h2>
     <ul class="unstyled">
@@ -105,7 +110,8 @@
     <h4 class="headline">Release Notes</h2>
     <ul class="unstyled">
       <li><a href="/m2e/documentation/release-notes-15.html">M2Eclipse 1.5</a></li>
-    </ul>      
+    </ul>  
+    </div>    
   </div>  
   <div class="col-md-9 docs">
   <h1><a href="#development-environment-setup" name="development-environment-setup">Development Environment Setup</a></h1><p>Download and unpack Eclipse latest SDK build from <a href="http://download.eclipse.org/eclipse/downloads/">http://download.eclipse.org/eclipse/downloads/</a> . The instructions below assume fresh/clean Eclipse installation.</p><p>Install M2Eclipse 1.5 or newer from <a href="http://download.eclipse.org/technology/m2e/releases">http://download.eclipse.org/technology/m2e/releases</a> . This is a P2 repository URL, use Eclipse Install UI to use it as explained in <a href="http://help.eclipse.org/topic//org.eclipse.platform.doc.user/tasks/tasks-127.htm">http://help.eclipse.org/topic//org.eclipse.platform.doc.user/tasks/tasks-127.htm</a></p><p>Clone the M2Eclipse Core repository, see <a href="https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core">https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core</a> for the list of available protocols.</p><p>Clone M2Eclipse Tests repository, see <a href="https://github.com/tesla/m2e-core-tests">https://github.com/tesla/m2e-core-tests</a> for the list of available protocols.</p><p>Import org.eclipse.m2e.workspace, m2e-core and m2e-core-tests as existing maven projects. Follow onscreen instructions, allow M2Eclipse to install additional software and restart eclipse when requested. Give Eclipse some time to update project configuration after restart. You may need to do Project/Clean&hellip;/Clean_all_projects to clear all compilation errors.</p><h2><a href="#running-m2eclipse-automated-regression-tests-from-eclipse" name="running-m2eclipse-automated-regression-tests-from-eclipse">Running M2Eclipse Automated Regression Tests from Eclipse</a></h2><p>Add the following memory configuration parameters to JVM startup options</p>
@@ -127,7 +133,8 @@ mvn clean integration-test -Puts,its -fae -Dm2e-core.url=file://&lt;full-pa
 </pre><h2><a href="#submitting-patches" name="submitting-patches">Submitting Patches</a></h2><h3>M2Eclipse Core Sources at Eclipse.org</h3><p>M2Eclipse only accepts changes contributed via Gerrit. Here is the wiki that explains how to use it <a href="http://wiki.eclipse.org/Gerrit">http://wiki.eclipse.org/Gerrit</a> . Good luck.</p><p>According to <a href="http://www.eclipse.org/legal/EclipseLegalProcessPoster.pdf">eclipse legal poster</a>, all contributors must have signed Eclipse CLA and their bugzilla email and git commit author must match (otherwise Eclipse git server refuses contribution).</p><p>Note that M2Eclipse developers do NOT watch Gerrit submissions directly. All contributions must be referenced from corresponding bugzilla records.</p><h3><a href="#m2eclipse-core-tests-at-github" name="m2eclipse-core-tests-at-github">M2Eclipse Core Tests at Github</a></h3><p>In most cases m2e core patches will require corresponding regression tests. Changes to m2e core tests repository must be submitted as github pull requests and must be linked to bugzilla record, along with corresponding Gerrit change set.</p>
   </div>
 </div>
-      </div><!-- END container -->
+            
+        </div>
     </div><!-- END wrap -->
     
         <div class="stickyFooter">

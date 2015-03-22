@@ -34,7 +34,8 @@
     <div class="wrap">
       
             <div class="header">
-        <div class="navbar navbar-default" role="navigation">
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="navbar-inner">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -45,7 +46,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="/m2e/index.html"> 
-                <img id="logo-header" src="/m2e/assets/img/m2e_logo@2x.svg" alt="M2Eclipse" width="150" height="61" style="margin:20px 0px 10px;"/>
+                <img id="logo-header" src="/m2e/assets/img/m2e_logo.png" alt="M2Eclipse" width="150" height="61" />
               </a>
             </div>
 
@@ -80,12 +81,15 @@
               </ul>
             </div>
           </div>
+          </div>
         </div>
       </div><!-- END header -->
       
       <div class="margin-bottom-20"></div>
-      <div class="container">
-        <h1><a href="#m2eclipse-website" name="m2eclipse-website">M2Eclipse Website</a></h1><p>The M2Eclipse website is a Jekyll-based website. This means the sources are a standard looking Jekyll-based site, and the website we publish for the outside world is what Jekyll generates. Currently at Eclipse websites are checked into a Git repository in their final form and that&rsquo;s what is served as our public website. There is no mechanism, currently, to run a transformation process so the M2Eclipse website is in one Git repository and then we push the final version to another Git repository. This is not idea but that&rsquo;s what we have. </p><p>To try and make it as simple as possible the Git repository with the sources contains a submodule that contains the final site. To get the sources and the module containing the <code>_site</code> directory do the following:</p>
+        <div class="container">
+          <div class="margin-bottom-100"></div>
+
+          <h1><a href="#m2eclipse-website" name="m2eclipse-website">M2Eclipse Website</a></h1><p>The M2Eclipse website is a Jekyll-based website. This means the sources are a standard looking Jekyll-based site, and the website we publish for the outside world is what Jekyll generates. Currently at Eclipse websites are checked into a Git repository in their final form and that&rsquo;s what is served as our public website. There is no mechanism, currently, to run a transformation process so the M2Eclipse website is in one Git repository and then we push the final version to another Git repository. This is not idea but that&rsquo;s what we have. </p><p>To try and make it as simple as possible the Git repository with the sources contains a submodule that contains the final site. To get the sources and the module containing the <code>_site</code> directory do the following:</p>
 <pre class="prettyprint linenums">
 git clone --recursive git@github.com:takari/m2eclipse-website.git
 </pre><p>Now you should have something that looks like the following:</p>
@@ -132,7 +136,8 @@ m2e-news.md
 138 [main] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.h.ContextHandler@77dcf9f4{/m2e,file:/Users/jvanzyl/Dropbox/takari-website-m2e/_site/,AVAILABLE}
 151 [main] INFO org.eclipse.jetty.server.ServerConnector - Started ServerConnector@69317d48{HTTP/1.1}{0.0.0.0:4000}
 </pre><p>Now you can add and edit content for the website, reload your browser, edit, rinse, repeat. The content will be generated in the <code>_site</code> directory as you make changes. Once you are finish working on content, you can go into the <code>_site</code> directory, add, commit, and then push changes to the production website. They should appear on <a href="http://eclipse.org/m2e">http://eclipse.org/m2e</a> fairly soon after.</p><p>NOTE: Ideally we will eventually have a process on the Eclipse host that will the transformation for us, or possibly ask the Webmaster to pull the final site from a directory within the Git repository. In a standard Jekyll-based build the default location of the generated site is <code>_site</code>. If we can ask to have our public facing website pulled from the <code>_site</code> directory in out website&rsquo;s Git repository we can probably put it all in a single repository.</p>
-      </div><!-- END container -->
+            
+        </div>
     </div><!-- END wrap -->
     
         <div class="stickyFooter">

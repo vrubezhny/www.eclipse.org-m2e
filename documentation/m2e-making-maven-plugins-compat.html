@@ -34,7 +34,8 @@
     <div class="wrap">
       
             <div class="header">
-        <div class="navbar navbar-default" role="navigation">
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="navbar-inner">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -45,7 +46,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="/m2e/index.html"> 
-                <img id="logo-header" src="/m2e/assets/img/m2e_logo@2x.svg" alt="M2Eclipse" width="150" height="61" style="margin:20px 0px 10px;"/>
+                <img id="logo-header" src="/m2e/assets/img/m2e_logo.png" alt="M2Eclipse" width="150" height="61" />
               </a>
             </div>
 
@@ -80,13 +81,17 @@
               </ul>
             </div>
           </div>
+          </div>
         </div>
       </div><!-- END header -->
       
       <div class="margin-bottom-20"></div>
-      <div class="container">
-        <div class="row">
+        <div class="container">
+          <div class="margin-bottom-100"></div>
+
+          <div class="row">
   <div class="col-md-3">
+    <div class="docNavigation affix">
     <div class="margin-bottom-30"></div>
     <h4 class="headline">Users</h2>
     <ul class="unstyled">
@@ -105,7 +110,8 @@
     <h4 class="headline">Release Notes</h2>
     <ul class="unstyled">
       <li><a href="/m2e/documentation/release-notes-15.html">M2Eclipse 1.5</a></li>
-    </ul>      
+    </ul>  
+    </div>    
   </div>  
   <div class="col-md-9 docs">
   <h3><a href="#overview" name="overview">Overview</a></h3><p>Starting with m2e 1.1, maven plugin developers can embed m2e lifecycle mapping metadata as META-INF/m2e/lifecycle-mapping-metadata.xml file included with main plugin artifact.</p><p>This file uses the same format as lifecycle-mapping-metadata.xml used by m2e project configurators and embedded in pom.xml file with some minor extensions to the format &ndash; elements are not required to provide plugin groupId, artifactId and versionRange because this information can be automatically derived from maven plugin already. Although groupId, artifactId and versionRange information is not required, it is still allowed by the format and maven plugin developers can still provide it if they choose so.</p><h3><a href="#mapping" name="mapping">mapping</a></h3>
@@ -212,7 +218,8 @@
 </pre>
   </div>
 </div>
-      </div><!-- END container -->
+            
+        </div>
     </div><!-- END wrap -->
     
         <div class="stickyFooter">
