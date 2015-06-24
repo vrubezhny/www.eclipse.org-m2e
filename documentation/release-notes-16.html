@@ -4,7 +4,7 @@
 <!--[if !IE]><!-->
 <html lang="en"> <!--<![endif]-->
   <head>
-    <title>M2Eclipse | News</title>
+    <title>M2Eclipse | 1.6 Release Notes</title>
     <!-- Meta -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,11 +89,33 @@
         <div class="container">
           <div class="margin-bottom-100"></div>
 
-          <div class="row"> 
-  <div class="col-md-9">
-  <h1>M2Eclipse 1.6.0 Released</h1><p>M2Eclipse 1.6.0 has been released as part of the Eclipse Mars release train, please check out the <a href="/m2e/documentation/release-notes-16.html">release notes</a></li>. </p>
-  </div>
+          <div class="row">
   <div class="col-md-3">
+    <div class="docNavigation affix">
+    <div class="margin-bottom-30"></div>
+    <h4 class="headline">Users</h2>
+    <ul class="unstyled">
+      <li><a href="/m2e/documentation/m2e-faq.html">FAQ</a></li>
+      <li><a href="/m2e/documentation/m2e-execution-not-covered.html">Execution Not Covered</a></li>
+    </ul>
+    <h4 class="headline">Developers</h2>
+    <ul class="unstyled">
+      <li><a href="/m2e/documentation/m2e-development-environment.html">Developement Environment Setup</a></li>
+    </ul>
+    <h4 class="headline">Extension Developers</h2>
+    <ul class="unstyled">
+      <li><a href="/m2e/documentation/m2e-extension-development.html">Getting Started</a></li>
+      <li><a href="/m2e/documentation/m2e-making-maven-plugins-compat.html">Making Maven Plugins Compatible</a></li>
+    </ul>
+    <h4 class="headline">Release Notes</h2>
+    <ul class="unstyled">
+      <li><a href="/m2e/documentation/release-notes-16.html">M2Eclipse 1.6</a></li>
+      <li><a href="/m2e/documentation/release-notes-15.html">M2Eclipse 1.5</a></li>
+    </ul>
+    </div>
+  </div>
+  <div class="col-md-9 docs">
+  <p><a href="https://www.eclipse.org/m2e">M2Eclipse</a> released version 1.6.0 as part of the Eclipse Mars release train. There are <a href="https://bugs.eclipse.org/bugs/buglist.cgi?bug_status=RESOLVED&bug_status=VERIFIED&bug_status=CLOSED&list_id=12090411&product=m2e&query_format=advanced&target_milestone=1.6.0%2FMars%20M1&target_milestone=1.6.0%2FMars%20M2&target_milestone=1.6.0%2FMars%20M3&target_milestone=1.6.0%2FMars%20M4&target_milestone=1.6.0%2FMars%20M5&target_milestone=1.6.0%2FMars%20M6&target_milestone=1.6.0%2FMars%20M7&target_milestone=1.6.0%2FMars%20RC1&target_milestone=1.6.0%2FMars%20RC2">86 Bugs</a> fixed as part of this release. Even though M2EClipse 1.6.0 targets Eclipse Mars, it should still be compatible with Eclipse Luna. Along with improving the overall performance in a number of areas, we made some nice usability improvements and bug fixes worth highlighting:</p><h1><a href="#new-embedded-maven-3-46-3-46-3-runtime" name="new-embedded-maven-3-46-3-46-3-runtime">New Embedded Maven 3&#46;3&#46;3 runtime</a></h1><p>The embedded Apache Maven runtime has been updated to maven 3.3.3. The <a href="http://takari.io/2015/03/19/core-extensions.html">Core Extension mechanism</a> is honored when running launch configurations (as in <code>Run</code> &gt; <code>Run as...</code> &gt; <code>Maven build</code>). However, custom configurations and extensions in <code>.mvn</code> will be ignored during regular Eclipse builds. If you&rsquo;re interested in playing with <a href="http://takari.io/2015/03/19/polyglot-maven.html">polyglot Maven</a> support for M2Eclipse, you can try the experimental <a href="https://github.com/jbosstools/m2e-polyglot-poc">M2Eclipse polyglot POC</a>.</p><h1><a href="#improved-auto-45-completion-in-pom-46-xml-editor" name="improved-auto-45-completion-in-pom-46-xml-editor">Improved auto&#45;completion in pom&#46;xml editor</a></h1><p>The <code>pom.xml</code> editor has some nice improvements in the content-assist area: deeply nested plugin configuration elements, such as <code>manifest</code> attributes, can now be auto-completed:</p><p><img src="images/content-assist.gif" alt="X""/></p><p>Pro tip : Make sure the plugin version is locked, so the content assist engine can infer which attributes are available.</p><h1><a href="#new-experimental-auto-45-update-configuration-feature" name="new-experimental-auto-45-update-configuration-feature">New experimental Auto&#45;update configuration feature</a></h1><p>Remember the time when every time you changed something in your pom.xml, you&rsquo;d get an <code>Out-of-Date project configuration</code> error marker? With M2Eclipse 1.6 we introduced an new mechanism that will automatically update the project configuration when configuration changes are made in a <code>pom.xml</code>. This feature needs to be manually enabled in the Maven Preferences:</p><p><img src="images/auto-update-pref.png" alt="X""/></p><p>This feature is marked as experimental and disabled by default as we found that, in some rare cases, infinite build loops might be triggered. If and when that happens, simply disable the preference, that should end the build loop.</p><h1><a href="#better-archetype-support" name="better-archetype-support">Better archetype support</a></h1><p>The embedded maven-archetype-plugin version was bumped to 2.3, which was a long overdue update. That fixed several outstanding archetype related issues.</p><p>The performance was improved when handling large archetype catalogs. Eg. reading Maven Central&rsquo;s catalog (<a href="http://repo1.maven.org/maven2/">http://repo1.maven.org/maven2/</a>) and its 10k archetypes is about 10 times faster.</p><h1><a href="#conclusion" name="conclusion">Conclusion</a></h1><p>So if you haven’t installed M2Eclipse 1.6.0 yet, head over to <a href="https://www.eclipse.org/m2e/download/">https://www.eclipse.org/m2e/download/</a> and have at it.</p><p>We’d love to hear your feedback on the <a href="https://dev.eclipse.org/mailman/listinfo/m2e-users">mailing list</a>, and please <a href="https://bugs.eclipse.org/bugs/enter_bug.cgi?product=m2e">report bugs or enhancement requests</a> if you see the need.</p>
   </div>
 </div>
             
