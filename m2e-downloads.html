@@ -100,7 +100,9 @@
     <span class="footnote">(toward 1.9)</span></h2>
   </div></a>
   <a href="http://download.eclipse.org/technology/m2e/snapshots/1.9.0/latest/"><div class="col-md-4 buttonBG">
-    <h2>Latest SNAPSHOT Build</h2>
+    <h2>Latest SNAPSHOT Build<br/>
+    <span class="footnote">&nbsp;</span>
+    </h2>
   </div></a>
 </div><h1><a href="#m2eclipse-download-area-layout" name="m2eclipse-download-area-layout">M2Eclipse Download Area Layout</a></h1>
 <pre class="prettyprint linenums">
@@ -124,7 +126,7 @@ milestones/
    1.1.0.&lt;qualifier&gt;/
    1.1.0.&lt;qualifier&gt;/
    1.1.0.&lt;qualifier&gt;/
-</pre><p>M2Eclipse will advertise <a href="http://download.eclipse.org/technology/m2e/releases/">http://download.eclipse.org/technology/m2e/releases/</a> as canonical M2Eclipse repository url. This repository is a composite that will contain all released M2Eclipse versions, so clients who use this url will be able to install releases and service releases from the same location. Clients will be able to use release-specific repositories (i.e. <a href="http://download.eclipse.org/technology/m2e/releases/1.0">http://download.eclipse.org/technology/m2e/releases/1.0</a>) if they are only interested in maintenance releases.</p><p><a href="http://download.eclipse.org/technology/m2e/milestones/">http://download.eclipse.org/technology/m2e/milestones/</a> contains milestone builds towards releases. It has similar structure as releases/ repository but without composite p2 repository at the top level. Users will need to pick release-specific milestone build &ldquo;stream&rdquo;.</p><p>M2Eclipse does not provide snapshot/nightly builds from download.eclipse.org</p><h2><a href="#m2eclipse-git-repository-tags" name="m2eclipse-git-repository-tags">M2Eclipse Git Repository Tags</a></h2><p>M2Eclipse git repository tags will match download area directory structure, i.e. &ldquo;releases/1.0/1.0.0.20110607-2117&rdquo;, &ldquo;milestones/1.1/1.1.0.&lt;qualifier&gt;&rdquo; and so on. Since builds are promoted from milestones to releases repositories, the same build can have multiple tags associated with it.</p><p>Tags are pushed to canonical git repository soon after build goes &ldquo;live&rdquo;.</p><h2><a href="#m2eclipse-release-train-contributions" name="m2eclipse-release-train-contributions">M2Eclipse Release Train Contributions</a></h2><p>During development, M2Eclipse will provide release train contributions via milestone version repository (i.e. <a href="http://download.eclipse.org/technology/m2e/milestones/1.6">http://download.eclipse.org/technology/m2e/milestones/1.6</a>). Each new build will be automatically picked up by the release aggregator job and does not require changes to aggregator descriptor.</p><p>During release, latest milestone build is *copied* to corresponding releases/ directory and M2Eclipse contribution to release train aggregator will need to be updated at this point.</p><h2><a href="#m2eclipse-releases" name="m2eclipse-releases">M2Eclipse Releases</a></h2>
+</pre><p>M2Eclipse will advertise <a href="http://download.eclipse.org/technology/m2e/releases/">http://download.eclipse.org/technology/m2e/releases/</a> as canonical M2Eclipse repository url. This repository is a composite that will contain all released M2Eclipse versions, so clients who use this url will be able to install releases and service releases from the same location. Clients will be able to use release-specific repositories (i.e. <a href="http://download.eclipse.org/technology/m2e/releases/1.0">http://download.eclipse.org/technology/m2e/releases/1.0</a>) if they are only interested in maintenance releases.</p><p><a href="http://download.eclipse.org/technology/m2e/milestones/">http://download.eclipse.org/technology/m2e/milestones/</a> contains milestone builds towards releases. It has similar structure as releases/ repository but without composite p2 repository at the top level. Users will need to pick release-specific milestone build &ldquo;stream&rdquo;.</p><p>M2Eclipse does not provide snapshot/nightly builds from download.eclipse.org</p><h2><a href="#m2eclipse-git-repository-tags" name="m2eclipse-git-repository-tags">M2Eclipse Git Repository Tags</a></h2><p>M2Eclipse git repository tags will match download area directory structure, i.e. &ldquo;releases/1.0/1.0.0.20110607-2117&rdquo;, &ldquo;milestones/1.1/1.1.0.&lt;qualifier&gt;&rdquo; and so on. Since builds are promoted from milestones to releases repositories, the same build can have multiple tags associated with it.</p><p>Tags are pushed to canonical git repository soon after build goes &ldquo;live&rdquo;.</p><h2><a href="#m2eclipse-release-train-contributions" name="m2eclipse-release-train-contributions">M2Eclipse Release Train Contributions</a></h2><p>During development, M2Eclipse will provide release train contributions via milestone version repository (i.e. <a href="http://download.eclipse.org/technology/m2e/milestones/1.9">http://download.eclipse.org/technology/m2e/milestones/1.9</a>). Each new build will be automatically picked up by the release aggregator job and does not require changes to aggregator descriptor.</p><p>During release, latest milestone build is *copied* to corresponding releases/ directory and M2Eclipse contribution to release train aggregator will need to be updated at this point.</p><h2><a href="#m2eclipse-releases" name="m2eclipse-releases">M2Eclipse Releases</a></h2>
 <table>
   <tbody>
     <tr>
@@ -300,7 +302,7 @@ milestones/
     <td>Oracle 1.8</td>
     <td>GTK+ 2</td>
     <td>
-      <a href="https://ci.takari.io/job/m2eclipse-core-tests/lastCompletedBuild/testReport/">1.8</a>
+      <a href="https://ci.takari.io/job/m2eclipse-core-tests/lastCompletedBuild/testReport/">1.9</a>
     </td>
   </tr>
   <tr>
@@ -309,7 +311,7 @@ milestones/
     <td>x86-64</td>
     <td>Oracle 1.8</td>
     <td>Cocoa</td>
-    <td>[TBD 1.8]</td>
+    <td>[TBD 1.9]</td>
   </tr>
   <!--
   <tr>
