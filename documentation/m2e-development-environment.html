@@ -118,7 +118,60 @@
     </div>
   </div>
   <div class="col-md-9 docs">
-  <h1><a href="#development-environment-setup" name="development-environment-setup">Development Environment Setup</a></h1><p>Download and unpack Eclipse latest SDK build from <a href="http://download.eclipse.org/eclipse/downloads/">http://download.eclipse.org/eclipse/downloads/</a> . The instructions below assume fresh/clean Eclipse installation.</p><p>Install M2Eclipse 1.7 or newer from <a href="http://download.eclipse.org/technology/m2e/releases">http://download.eclipse.org/technology/m2e/releases</a> . This is a P2 repository URL, use Eclipse Install UI to use it as explained in <a href="http://help.eclipse.org/topic/org.eclipse.platform.doc.user/tasks/tasks-127.htm">http://help.eclipse.org/topic/org.eclipse.platform.doc.user/tasks/tasks-127.htm</a></p><p>Clone the M2Eclipse Core repository, see <a href="https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core">https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core</a> for the list of available protocols.</p><p>Clone M2Eclipse Tests repository, see <a href="https://github.com/tesla/m2e-core-tests">https://github.com/tesla/m2e-core-tests</a> for the list of available protocols.</p><p>Import org.eclipse.m2e.workspace, m2e-core and m2e-core-tests as existing maven projects. Follow onscreen instructions, allow M2Eclipse to install additional software and restart eclipse when requested. Give Eclipse some time to update project configuration after restart. You may need to do Project/Clean&hellip;/Clean_all_projects to clear all compilation errors.</p><h2><a href="#running-m2eclipse-automated-regression-tests-from-eclipse" name="running-m2eclipse-automated-regression-tests-from-eclipse">Running M2Eclipse Automated Regression Tests from Eclipse</a></h2><p>Add the following memory configuration parameters to JVM startup options</p>
+  <h1><a href="#development-environment-setup" name="development-environment-setup">Development Environment Setup</a></h1>
+  <p>Download and unpack Eclipse latest SDK build from <a href="http://download.eclipse.org/eclipse/downloads/">http://download.eclipse.org/eclipse/downloads/</a>.
+    The instructions below assume fresh/clean Eclipse SDK installation.</p>
+  <p>Use the instructions at <a href="http://help.eclipse.org/topic/org.eclipse.platform.doc.user/tasks/tasks-124.htm">http://help.eclipse.org/topic/org.eclipse.platform.doc.user/tasks/tasks-124.htm</a>
+    to install &ldquo;Maven integration for Eclipse&rdquo; and &ldquo;Git integration for Eclipse&rdquo; from  the standard update sites of the Eclipse SDK.
+      You can also find and install the most recent release of these plugins in the following P2 repository URLs, which can be added using the Eclipse 
+      Install UI as explained in
+      <a href="http://help.eclipse.org/topic/org.eclipse.platform.doc.user/tasks/tasks-127.htm">http://help.eclipse.org/topic/org.eclipse.platform.doc.user/tasks/tasks-127.htm</a>:
+      <ul>
+        <li><a href="http://download.eclipse.org/technology/m2e/releases">http://download.eclipse.org/technology/m2e/releases</a></li>
+        <li><a href="https://download.eclipse.org/egit/updates/">https://download.eclipse.org/egit/updates/</a></li>
+      </ul>
+  </p>
+  <p>Some modules of the m2e core code make use of logback classic. When you later proceed to import projects, you will get errors in some (e.g. org.eclipse.m2e.logback.appender and 
+    org.eclipse.m2e.logback.configuration) complaining that you are missing the ch.qos.logback.classic library in your Eclipse. The easiest way to install the &ldquo;Logback Classic
+    Module&rdquo; is to again use the instructions at <a href="http://help.eclipse.org/topic/org.eclipse.platform.doc.user/tasks/tasks-124.htm">http://help.eclipse.org/topic/org.eclipse.platform.doc.user/tasks/tasks-124.htm</a>
+    to install the &ldquo;m2e - slf4j over logback logging&rdquo; optional plugin. This provides a maven console in your host workspace. Alternatively if you do not want that feature, 
+    you need to at least inestall the &ldquo;Logback Classic Module&rdquo; plugin from <a href="https://download.eclipse.org/tools/orbit/downloads/">the Orbit repository</a>, so that
+    it is available in your host Eclipse.
+  </p>
+  <p>You should now have all plugins you need in your Eclipse to proceed with building the source code.</p>
+  <p>The code is split across two repositories:
+    <ul>
+      <li>The M2Eclipse Core repository, see <a href="https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core">https://git.eclipse.org/r/#/admin/projects/m2e/m2e-core</a>
+        for the list of available protocols.</li>
+      <li>The M2Eclipse Core Tests repository, see <a href="https://github.com/tesla/m2e-core-tests">https://github.com/tesla/m2e-core-tests</a> for the list of available protocols.</li>
+    </ul>
+  </p>
+  <p>The latter is configured as a git submodule of the former. Either clone the first repository including submodules, or just clone both repositories separately. Either way, before 
+    proceeding to import anything into you workspace, make sure you are on the matching branches of the m2e-core repository and the m2e-core-tests repository (whether that was cloned separately 
+    or as a submodule). For example if you are on the master branch of m2e-core you should be on the master branch of m2e-core-tests as well. Otherwise you may get errors when oou import from the
+    latter, where the test projects will not be able to resolve the snapshot version of m2e core they are testing against.
+  </p>
+  <p>Once you are on the correct branch, perform a project import in this order:</p>
+    <ol>
+      <li>First import as Maven projects m2e-maven-runtime and all projects within it. These projects bundle the Maven runtime as Eclipse plugins.</li>
+      <li>Next import as Maven projects everything under m2e-core <em>but make sure you exclude anything under m2e-core-tests</em>. Expect m2e-core-tests projects to show up for import if you
+        cloned the latter as a submodule, which makes it manifest as a nested folder. <em>Furthermore, make sure you only import Maven projects and not any Eclipse projects</em>: You will find
+        many of the latter type nested deeply within m2e-core projects and they are all actually test-data resources not meant to live within your development (host) workspaces.
+        <ul>
+          <li><em>NOTE:</em> at this stage, m2eclipse should prompt you to install several m2e connectors for Tycho and Modello. As you 
+          follow onscreen instructions, allow M2Eclipse to install additional software and restart Eclipse when requested.</li>
+          <li>Before importing further projects, you will need to go to <a href="https://help.eclipse.org/topic/org.eclipse.jdt.doc.user/reference/ref-properties-build-path.htm#source">the source tab of the Java Build Path properties</a>
+            of project org.eclipse.m2e.tests.common and toggle the &ldquo;Contains test sources&rdquo; setting to &lsquo;No&rsquo;.</li>
+          <li>Update the maven project configuration for all projects and do a clean build. Give Eclipse some time to update project configuration after restart.</li>
+        </ul>
+      </li>
+      <li>Finally, you can import as Maven projects the test projects m2e-core-tests. <em>NOTE: </em>Once again you will need to be careful to only import Maven projects. Do not import Eclipse 
+        projects. The latter will be nested deeply within m2e-core-tests projects and are actually test-data resources not meant to live within your development (host) workspaces.
+      </li>
+    </ol>
+  </p>
+  <p>You may need to Update Maven (forcing update of snapshot releases) and do Project/Clean&hellip;/Clean_all_projects to clear all compilation errors.</p>
+   <h2><a href="#running-m2eclipse-automated-regression-tests-from-eclipse" name="running-m2eclipse-automated-regression-tests-from-eclipse">Running M2Eclipse Automated Regression Tests from Eclipse</a></h2><p>Add the following memory configuration parameters to JVM startup options</p>
 <pre class="prettyprint linenums">
 -Xmx1G
 </pre><p>Use JUnit Plug-in Tests launch configuration type to run/debug M2Eclipse automated regressions tests from Eclipse.</p><p>Caveat. Two tests are expected to fail when run from Eclipse</p>
